@@ -1,0 +1,9244 @@
+[
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0243",
+    "seq": 1209,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0814",
+    "seq": 341,
+    "value": "icmp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0881",
+    "seq": 1119,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0203",
+    "seq": 793,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0882",
+    "seq": 987
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0347",
+    "seq": 384,
+    "value": "icmp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0398",
+    "seq": 140,
+    "value": "permit"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0610",
+    "seq": 520,
+    "value": "@GRP-028"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0232",
+    "seq": 1017,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0507",
+    "seq": 467,
+    "value": "@GRP-029"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0402",
+    "seq": 281,
+    "value": "udp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0485",
+    "seq": 750,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0330",
+    "seq": 636
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0717",
+    "seq": 805,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0702",
+    "seq": 599,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0440",
+    "seq": 1069,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0853",
+    "seq": 231,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0830",
+    "seq": 918,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0068",
+    "seq": 639
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0775",
+    "seq": 1052
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0712",
+    "seq": 165,
+    "value": "permit"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0819",
+    "seq": 394,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0282",
+    "seq": 866,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0207",
+    "seq": 970,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0212",
+    "seq": 1163,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0479",
+    "seq": 116,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0030",
+    "seq": 4,
+    "value": "permit"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0685",
+    "seq": 708
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0127",
+    "seq": 1115,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0153",
+    "seq": 999,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0367",
+    "seq": 1098,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0745",
+    "seq": 90,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0212",
+    "seq": 1165,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0226",
+    "seq": 768,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0720",
+    "seq": 404,
+    "value": "icmp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0829",
+    "seq": 779,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0157",
+    "seq": 178,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0767",
+    "seq": 898,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0554",
+    "seq": 712,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0693",
+    "seq": 1130
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0408",
+    "seq": 979,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0322",
+    "seq": 962
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0295",
+    "seq": 916
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0656",
+    "seq": 1145
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0426",
+    "seq": 762,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0732",
+    "seq": 849
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0585",
+    "seq": 673,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0895",
+    "seq": 515,
+    "value": "@GRP-028"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0345",
+    "seq": 212,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0252",
+    "seq": 1055,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0036",
+    "seq": 741,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0608",
+    "seq": 198,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0833",
+    "seq": 119,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0394",
+    "seq": 847,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0764",
+    "seq": 913
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0387",
+    "seq": 73,
+    "value": "permit"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0108",
+    "seq": 28,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0195",
+    "seq": 373,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0461",
+    "seq": 608,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0253",
+    "seq": 293,
+    "value": "icmp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0391",
+    "seq": 729
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0737",
+    "seq": 471,
+    "value": "@GRP-011"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0889",
+    "seq": 511,
+    "value": "@GRP-010"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0447",
+    "seq": 45,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0776",
+    "seq": 786,
+    "value": true
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0774",
+    "seq": 701
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0186",
+    "seq": 1112,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0472",
+    "seq": 316,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0089",
+    "seq": 802,
+    "value": false
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0675",
+    "seq": 459,
+    "value": "@GRP-022"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0587",
+    "seq": 743,
+    "value": true
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0227",
+    "seq": 1217
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0419",
+    "seq": 654,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0430",
+    "seq": 592
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0811",
+    "seq": 334,
+    "value": "udp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0100",
+    "seq": 266,
+    "value": "icmp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0810",
+    "seq": 364,
+    "value": "tcp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0502",
+    "seq": 223,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0401",
+    "seq": 1037,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0823",
+    "seq": 1149
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0359",
+    "seq": 1027
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0302",
+    "seq": 551,
+    "value": "@GRP-008"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0201",
+    "seq": 249,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0721",
+    "seq": 1046,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0650",
+    "seq": 783,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0653",
+    "seq": 89,
+    "value": "deny"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0817",
+    "seq": 501,
+    "value": "@GRP-038"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0382",
+    "seq": 156,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0139",
+    "seq": 648,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0221",
+    "seq": 1161,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0718",
+    "seq": 241,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0564",
+    "seq": 1139,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0330",
+    "seq": 637,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0607",
+    "seq": 1010,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0521",
+    "seq": 351,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0859",
+    "seq": 1015,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0729",
+    "seq": 230,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0783",
+    "seq": 797,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0102",
+    "seq": 757,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0008",
+    "seq": 247,
+    "value": "any"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0800",
+    "seq": 23,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0360",
+    "seq": 872
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0070",
+    "seq": 877
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0029",
+    "seq": 828,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0166",
+    "seq": 118,
+    "value": "permit"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0343",
+    "seq": 65,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0015",
+    "seq": 584,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0023",
+    "seq": 1081,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0032",
+    "seq": 1182
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0585",
+    "seq": 675,
+    "value": false
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0654",
+    "seq": 503,
+    "value": "@GRP-017"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0186",
+    "seq": 1110,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0308",
+    "seq": 390,
+    "value": "udp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0349",
+    "seq": 274,
+    "value": "udp"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0564",
+    "seq": 1140
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0090",
+    "seq": 221,
+    "value": "deny"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0042",
+    "seq": 573
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0145",
+    "seq": 814,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0601",
+    "seq": 2,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0315",
+    "seq": 1178,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0604",
+    "seq": 643
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0366",
+    "seq": 622,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0600",
+    "seq": 61,
+    "value": "deny"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0768",
+    "seq": 690
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0460",
+    "seq": 55,
+    "value": "permit"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0539",
+    "seq": 97,
+    "value": "deny"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0520",
+    "seq": 468,
+    "value": "@GRP-013"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0551",
+    "seq": 601,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0583",
+    "seq": 754
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0700",
+    "seq": 152,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0323",
+    "seq": 126,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0104",
+    "seq": 243,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0815",
+    "seq": 1171,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0235",
+    "seq": 296,
+    "value": "tcp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0225",
+    "seq": 305,
+    "value": "any"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0063",
+    "seq": 972
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0446",
+    "seq": 269,
+    "value": "udp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0319",
+    "seq": 564,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0802",
+    "seq": 776
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0433",
+    "seq": 18,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0466",
+    "seq": 219,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0651",
+    "seq": 977,
+    "value": false
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0335",
+    "seq": 931
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0718",
+    "seq": 242,
+    "value": "any"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0525",
+    "seq": 553,
+    "value": "@GRP-013"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0771",
+    "seq": 349,
+    "value": "udp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0548",
+    "seq": 789,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0784",
+    "seq": 859
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0681",
+    "seq": 480,
+    "value": "@GRP-002"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0204",
+    "seq": 189,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0797",
+    "seq": 318,
+    "value": "udp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0662",
+    "seq": 87,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0058",
+    "seq": 1004,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0664",
+    "seq": 174,
+    "value": "permit"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0066",
+    "seq": 261,
+    "value": "udp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0775",
+    "seq": 1050
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0840",
+    "seq": 100,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0364",
+    "seq": 54,
+    "value": "permit"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0541",
+    "seq": 92,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0467",
+    "seq": 890
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0604",
+    "seq": 644,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0143",
+    "seq": 617,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0822",
+    "seq": 427,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0455",
+    "seq": 908,
+    "value": true
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0497",
+    "seq": 1128
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0049",
+    "seq": 721
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0006",
+    "seq": 955
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0717",
+    "seq": 803,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0260",
+    "seq": 532,
+    "value": "@GRP-025"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0625",
+    "seq": 3,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0565",
+    "seq": 940
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0493",
+    "seq": 254,
+    "value": "icmp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0401",
+    "seq": 1036
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0793",
+    "seq": 952,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0113",
+    "seq": 48,
+    "value": "deny"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0099",
+    "seq": 541,
+    "value": "@GRP-001"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0612",
+    "seq": 163,
+    "value": "permit"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0711",
+    "seq": 522,
+    "value": "@GRP-036"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0819",
+    "seq": 393,
+    "value": "icmp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0210",
+    "seq": 1093,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0635",
+    "seq": 821,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0261",
+    "seq": 298,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0412",
+    "seq": 852,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0755",
+    "seq": 671,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0663",
+    "seq": 652,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0374",
+    "seq": 286,
+    "value": "any"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0002",
+    "seq": 568
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0372",
+    "seq": 1224,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0604",
+    "seq": 642,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0568",
+    "seq": 160,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0455",
+    "seq": 909
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0526",
+    "seq": 662,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0253",
+    "seq": 294,
+    "value": "any"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0413",
+    "seq": 388,
+    "value": "tcp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0866",
+    "seq": 839
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0231",
+    "seq": 431,
+    "value": "any"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0897",
+    "seq": 121,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0152",
+    "seq": 424,
+    "value": "any"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0535",
+    "seq": 149,
+    "value": "deny"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0550",
+    "seq": 1170
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0651",
+    "seq": 978
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0486",
+    "seq": 590,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0756",
+    "seq": 401,
+    "value": "udp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0666",
+    "seq": 124,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0331",
+    "seq": 135,
+    "value": "permit"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0743",
+    "seq": 192,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0077",
+    "seq": 80,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0893",
+    "seq": 193,
+    "value": "permit"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0508",
+    "seq": 278,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0412",
+    "seq": 854,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0388",
+    "seq": 1198,
+    "value": false
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0165",
+    "seq": 749
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0016",
+    "seq": 155,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0801",
+    "seq": 434,
+    "value": "udp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0696",
+    "seq": 924,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0483",
+    "seq": 1007
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0578",
+    "seq": 257,
+    "value": "udp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0702",
+    "seq": 597,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0033",
+    "seq": 453,
+    "value": "@GRP-001"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0423",
+    "seq": 1074
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0392",
+    "seq": 773,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0282",
+    "seq": 864,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0335",
+    "seq": 929
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0164",
+    "seq": 473,
+    "value": "@GRP-040"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0390",
+    "seq": 812,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0131",
+    "seq": 1133,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0186",
+    "seq": 1111
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0672",
+    "seq": 288,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0165",
+    "seq": 748,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0498",
+    "seq": 103,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0263",
+    "seq": 207,
+    "value": "permit"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0422",
+    "seq": 43,
+    "value": "permit"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0823",
+    "seq": 1151
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0247",
+    "seq": 984,
+    "value": false
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0813",
+    "seq": 550,
+    "value": "@GRP-010"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0519",
+    "seq": 157,
+    "value": "deny"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0062",
+    "seq": 533,
+    "value": "@GRP-021"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0195",
+    "seq": 374,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0388",
+    "seq": 1196,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0851",
+    "seq": 141,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0821",
+    "seq": 1072,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0846",
+    "seq": 1088,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0153",
+    "seq": 1000
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0158",
+    "seq": 475,
+    "value": "@GRP-038"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0581",
+    "seq": 1101,
+    "value": false
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0116",
+    "seq": 538,
+    "value": "@GRP-012"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0131",
+    "seq": 1136
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0127",
+    "seq": 1113,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0665",
+    "seq": 492,
+    "value": "@GRP-009"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0415",
+    "seq": 574,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0258",
+    "seq": 496,
+    "value": "@GRP-014"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0101",
+    "seq": 151,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0022",
+    "seq": 857,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0556",
+    "seq": 695
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0651",
+    "seq": 976
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0267",
+    "seq": 539,
+    "value": "@GRP-016"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0050",
+    "seq": 300,
+    "value": "any"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0233",
+    "seq": 1203
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0721",
+    "seq": 1048,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0015",
+    "seq": 586,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0105",
+    "seq": 147,
+    "value": "deny"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0812",
+    "seq": 547,
+    "value": "@GRP-029"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0133",
+    "seq": 629,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0764",
+    "seq": 914,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0322",
+    "seq": 963,
+    "value": false
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0192",
+    "seq": 559,
+    "value": "@GRP-018"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0565",
+    "seq": 941,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0496",
+    "seq": 113,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0369",
+    "seq": 1042,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0796",
+    "seq": 506,
+    "value": "@GRP-003"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0019",
+    "seq": 686,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0873",
+    "seq": 727,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0603",
+    "seq": 883
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0767",
+    "seq": 896,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0692",
+    "seq": 13,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0518",
+    "seq": 1033
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0435",
+    "seq": 870
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0689",
+    "seq": 408,
+    "value": "icmp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0087",
+    "seq": 354,
+    "value": "any"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0221",
+    "seq": 1160
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0628",
+    "seq": 263,
+    "value": "any"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0353",
+    "seq": 1190
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0744",
+    "seq": 1122
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0335",
+    "seq": 930,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0767",
+    "seq": 897
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0341",
+    "seq": 84,
+    "value": "permit"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0232",
+    "seq": 1020
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0181",
+    "seq": 197,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0359",
+    "seq": 1024,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0643",
+    "seq": 487,
+    "value": "@GRP-011"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0411",
+    "seq": 1023,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0504",
+    "seq": 133,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0768",
+    "seq": 689,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0145",
+    "seq": 816,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0486",
+    "seq": 589
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0073",
+    "seq": 611,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0635",
+    "seq": 823,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0307",
+    "seq": 279,
+    "value": "icmp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0716",
+    "seq": 331,
+    "value": "udp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0093",
+    "seq": 180,
+    "value": "permit"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0280",
+    "seq": 329,
+    "value": "icmp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0835",
+    "seq": 996,
+    "value": true
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0753",
+    "seq": 820
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0772",
+    "seq": 252,
+    "value": "udp"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0690",
+    "seq": 523,
+    "value": "@GRP-037"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0420",
+    "seq": 807,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0224",
+    "seq": 886,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0710",
+    "seq": 634,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0867",
+    "seq": 1104
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0297",
+    "seq": 322,
+    "value": "udp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0865",
+    "seq": 125,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0386",
+    "seq": 361,
+    "value": "icmp"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0467",
+    "seq": 892
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0467",
+    "seq": 889,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0283",
+    "seq": 31,
+    "value": "permit"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0237",
+    "seq": 338,
+    "value": "udp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0023",
+    "seq": 1080
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0232",
+    "seq": 1018
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0827",
+    "seq": 485,
+    "value": "@GRP-038"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0685",
+    "seq": 705,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0391",
+    "seq": 730,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0446",
+    "seq": 270,
+    "value": "udp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0041",
+    "seq": 303,
+    "value": "udp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0518",
+    "seq": 1032,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0357",
+    "seq": 835,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0634",
+    "seq": 477,
+    "value": "@GRP-032"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0050",
+    "seq": 299,
+    "value": "tcp"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0444",
+    "seq": 607
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0243",
+    "seq": 1207,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0521",
+    "seq": 352,
+    "value": "any"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0299",
+    "seq": 368,
+    "value": "udp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0873",
+    "seq": 726
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0845",
+    "seq": 595
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0604",
+    "seq": 645
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0559",
+    "seq": 1078,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0465",
+    "seq": 1040,
+    "value": false
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0740",
+    "seq": 505,
+    "value": "@GRP-012"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0818",
+    "seq": 53,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0329",
+    "seq": 412,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0637",
+    "seq": 841,
+    "value": true
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0110",
+    "seq": 1066
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0821",
+    "seq": 1071
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0753",
+    "seq": 818
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0626",
+    "seq": 20,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0353",
+    "seq": 1191,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0233",
+    "seq": 1201
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0581",
+    "seq": 1100
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0367",
+    "seq": 1096,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0103",
+    "seq": 534,
+    "value": "@GRP-007"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0324",
+    "seq": 966,
+    "value": false
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0234",
+    "seq": 542,
+    "value": "@GRP-033"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0806",
+    "seq": 228,
+    "value": "permit"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0586",
+    "seq": 456,
+    "value": "@GRP-039"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0146",
+    "seq": 301,
+    "value": "udp"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0187",
+    "seq": 881
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0420",
+    "seq": 808
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0444",
+    "seq": 605
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0227",
+    "seq": 1216,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0255",
+    "seq": 405,
+    "value": "udp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0435",
+    "seq": 869,
+    "value": false
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0078",
+    "seq": 549,
+    "value": "@GRP-014"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0847",
+    "seq": 29,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0015",
+    "seq": 585
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0461",
+    "seq": 610,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0032",
+    "seq": 1183,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0019",
+    "seq": 684,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0453",
+    "seq": 30,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0616",
+    "seq": 717,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0282",
+    "seq": 865
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0193",
+    "seq": 291,
+    "value": "tcp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0506",
+    "seq": 38,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0295",
+    "seq": 915,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0481",
+    "seq": 39,
+    "value": "permit"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0533",
+    "seq": 50,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0392",
+    "seq": 771,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0508",
+    "seq": 277,
+    "value": "any"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0890",
+    "seq": 102,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0029",
+    "seq": 830,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0485",
+    "seq": 752,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0753",
+    "seq": 817,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0110",
+    "seq": 1064
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0378",
+    "seq": 992,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0619",
+    "seq": 275,
+    "value": "any"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0414",
+    "seq": 664
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0673",
+    "seq": 194,
+    "value": "permit"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0352",
+    "seq": 482,
+    "value": "@GRP-006"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0432",
+    "seq": 213,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0144",
+    "seq": 308,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0221",
+    "seq": 1159,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0509",
+    "seq": 474,
+    "value": "@GRP-005"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0372",
+    "seq": 1227
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0829",
+    "seq": 782
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0603",
+    "seq": 884,
+    "value": false
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0350",
+    "seq": 531,
+    "value": "@GRP-024"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0735",
+    "seq": 190,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0426",
+    "seq": 760,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0499",
+    "seq": 1056,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0486",
+    "seq": 588,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0682",
+    "seq": 77,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0362",
+    "seq": 1060
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0514",
+    "seq": 245,
+    "value": "udp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0695",
+    "seq": 359,
+    "value": "tcp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0165",
+    "seq": 747
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0823",
+    "seq": 1150,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0406",
+    "seq": 1218,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0436",
+    "seq": 96,
+    "value": "permit"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0562",
+    "seq": 767
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0056",
+    "seq": 419,
+    "value": "tcp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0337",
+    "seq": 86,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0430",
+    "seq": 593,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0702",
+    "seq": 598
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0651",
+    "seq": 975,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0730",
+    "seq": 83,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0141",
+    "seq": 24,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0394",
+    "seq": 845,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0645",
+    "seq": 710
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0424",
+    "seq": 901
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0378",
+    "seq": 990,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0900",
+    "seq": 524,
+    "value": "@GRP-008"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0006",
+    "seq": 954,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0366",
+    "seq": 623
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0548",
+    "seq": 790
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0696",
+    "seq": 927
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0645",
+    "seq": 709,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0210",
+    "seq": 1094
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0122",
+    "seq": 509,
+    "value": "@GRP-031"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0545",
+    "seq": 344,
+    "value": "any"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0868",
+    "seq": 1153
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0029",
+    "seq": 829
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0672",
+    "seq": 287,
+    "value": "icmp"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0450",
+    "seq": 560,
+    "value": "@GRP-029"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0815",
+    "seq": 1172
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0751",
+    "seq": 255,
+    "value": "tcp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0680",
+    "seq": 215,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0001",
+    "seq": 22,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0704",
+    "seq": 1176,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0783",
+    "seq": 798
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0825",
+    "seq": 960
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0439",
+    "seq": 382,
+    "value": "icmp"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0369",
+    "seq": 1045
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0864",
+    "seq": 184,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0409",
+    "seq": 1156
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0786",
+    "seq": 137,
+    "value": "permit"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0570",
+    "seq": 399,
+    "value": "any"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0132",
+    "seq": 397,
+    "value": "tcp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0663",
+    "seq": 651
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0003",
+    "seq": 396,
+    "value": "icmp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0485",
+    "seq": 751
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0193",
+    "seq": 292,
+    "value": "udp"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0882",
+    "seq": 989
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0063",
+    "seq": 973,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0007",
+    "seq": 25,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0881",
+    "seq": 1117,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0646",
+    "seq": 129,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0124",
+    "seq": 328,
+    "value": "any"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0089",
+    "seq": 801
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0247",
+    "seq": 985
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0814",
+    "seq": 342,
+    "value": "icmp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0696",
+    "seq": 926,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0659",
+    "seq": 1090,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0171",
+    "seq": 416,
+    "value": "icmp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0598",
+    "seq": 1187,
+    "value": false
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0762",
+    "seq": 469,
+    "value": "@GRP-017"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0002",
+    "seq": 567,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0160",
+    "seq": 260,
+    "value": "udp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0014",
+    "seq": 44,
+    "value": "permit"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0094",
+    "seq": 95,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0169",
+    "seq": 682
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0469",
+    "seq": 525,
+    "value": "@GRP-031"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0590",
+    "seq": 82,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0714",
+    "seq": 447,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0841",
+    "seq": 722,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0766",
+    "seq": 826
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0334",
+    "seq": 1195
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0458",
+    "seq": 627,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0732",
+    "seq": 848,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0820",
+    "seq": 201,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0375",
+    "seq": 1030,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0293",
+    "seq": 995,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0299",
+    "seq": 367,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0670",
+    "seq": 702,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0426",
+    "seq": 761
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0499",
+    "seq": 1057
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0602",
+    "seq": 167,
+    "value": "deny"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0892",
+    "seq": 530,
+    "value": "@GRP-032"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0172",
+    "seq": 365,
+    "value": "tcp"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0061",
+    "seq": 476,
+    "value": "@GRP-002"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0208",
+    "seq": 289,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0774",
+    "seq": 698,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0328",
+    "seq": 17,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0002",
+    "seq": 569,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0551",
+    "seq": 603,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0871",
+    "seq": 203,
+    "value": "permit"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0583",
+    "seq": 756
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0655",
+    "seq": 93,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0801",
+    "seq": 433,
+    "value": "udp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0227",
+    "seq": 1215
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0598",
+    "seq": 1185,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0145",
+    "seq": 815
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0797",
+    "seq": 317,
+    "value": "icmp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0658",
+    "seq": 74,
+    "value": "permit"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0431",
+    "seq": 239,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0775",
+    "seq": 1051,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0293",
+    "seq": 993,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0416",
+    "seq": 226,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0008",
+    "seq": 248,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0081",
+    "seq": 948,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0751",
+    "seq": 256,
+    "value": "tcp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0292",
+    "seq": 324,
+    "value": "any"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0250",
+    "seq": 106,
+    "value": "permit"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0270",
+    "seq": 421,
+    "value": "icmp"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0693",
+    "seq": 1132
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0846",
+    "seq": 1089
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0595",
+    "seq": 8,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0526",
+    "seq": 661
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0391",
+    "seq": 731
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0194",
+    "seq": 481,
+    "value": "@GRP-016"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0080",
+    "seq": 945,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0377",
+    "seq": 187,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0423",
+    "seq": 1075,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0390",
+    "seq": 811
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0143",
+    "seq": 618
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0835",
+    "seq": 998,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0049",
+    "seq": 718,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0367",
+    "seq": 1097
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0279",
+    "seq": 561,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0537",
+    "seq": 78,
+    "value": "permit"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0465",
+    "seq": 1041
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0685",
+    "seq": 707,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0696",
+    "seq": 925
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0510",
+    "seq": 738,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0753",
+    "seq": 819,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0362",
+    "seq": 1059,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0638",
+    "seq": 122,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0303",
+    "seq": 1106,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0609",
+    "seq": 112,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0480",
+    "seq": 378,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0187",
+    "seq": 880,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0199",
+    "seq": 59,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0369",
+    "seq": 1044,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0409",
+    "seq": 1157,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0366",
+    "seq": 624,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0423",
+    "seq": 1073,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0305",
+    "seq": 472,
+    "value": "@GRP-007"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0853",
+    "seq": 232,
+    "value": "icmp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0102",
+    "seq": 758
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0747",
+    "seq": 283,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0073",
+    "seq": 613,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0206",
+    "seq": 66,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0358",
+    "seq": 150,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0598",
+    "seq": 1186
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0562",
+    "seq": 764,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0747",
+    "seq": 284,
+    "value": "any"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0480",
+    "seq": 377,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0784",
+    "seq": 858,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0210",
+    "seq": 1095,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0333",
+    "seq": 208,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0685",
+    "seq": 706
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0787",
+    "seq": 164,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0043",
+    "seq": 657,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0225",
+    "seq": 306,
+    "value": "tcp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0861",
+    "seq": 161,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0744",
+    "seq": 1123,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0020",
+    "seq": 162,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0628",
+    "seq": 264,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0227",
+    "seq": 1214,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0607",
+    "seq": 1012,
+    "value": false
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0717",
+    "seq": 806
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0720",
+    "seq": 403,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0562",
+    "seq": 766,
+    "value": false
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0635",
+    "seq": 824
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0110",
+    "seq": 1063,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0374",
+    "seq": 285,
+    "value": "icmp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0406",
+    "seq": 1220,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0315",
+    "seq": 1180,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0551",
+    "seq": 602
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0013",
+    "seq": 379,
+    "value": "icmp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0572",
+    "seq": 205,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0848",
+    "seq": 153,
+    "value": "permit"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0428",
+    "seq": 580
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0804",
+    "seq": 127,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0067",
+    "seq": 1083
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0725",
+    "seq": 98,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0554",
+    "seq": 714,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0522",
+    "seq": 71,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0041",
+    "seq": 304,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0785",
+    "seq": 1143,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0881",
+    "seq": 1118
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0390",
+    "seq": 810,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0138",
+    "seq": 40,
+    "value": "permit"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0503",
+    "seq": 309,
+    "value": "udp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0429",
+    "seq": 35,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0408",
+    "seq": 981,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0650",
+    "seq": 784
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0198",
+    "seq": 546,
+    "value": "@GRP-019"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0603",
+    "seq": 885
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0838",
+    "seq": 169,
+    "value": "permit"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0203",
+    "seq": 796
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0375",
+    "seq": 1028,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0627",
+    "seq": 233,
+    "value": "udp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0232",
+    "seq": 1019,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0663",
+    "seq": 650,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0562",
+    "seq": 765
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0212",
+    "seq": 1164
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0274",
+    "seq": 148,
+    "value": "permit"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0477",
+    "seq": 450,
+    "value": "any"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0553",
+    "seq": 131,
+    "value": "permit"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0171",
+    "seq": 415,
+    "value": "any"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0177",
+    "seq": 518,
+    "value": "@GRP-019"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0430",
+    "seq": 591,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0428",
+    "seq": 579,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0837",
+    "seq": 224,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0048",
+    "seq": 921,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0556",
+    "seq": 696,
+    "value": false
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0268",
+    "seq": 497,
+    "value": "@GRP-021"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0645",
+    "seq": 711,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0024",
+    "seq": 105,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0319",
+    "seq": 565
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0435",
+    "seq": 868
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0172",
+    "seq": 366,
+    "value": "tcp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0187",
+    "seq": 879
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0404",
+    "seq": 938,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0329",
+    "seq": 411,
+    "value": "udp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0879",
+    "seq": 732,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0215",
+    "seq": 314,
+    "value": "any"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0421",
+    "seq": 528,
+    "value": "@GRP-005"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0275",
+    "seq": 132,
+    "value": "permit"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0576",
+    "seq": 220,
+    "value": "permit"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0127",
+    "seq": 1116
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0080",
+    "seq": 943,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0482",
+    "seq": 117,
+    "value": "permit"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0802",
+    "seq": 778
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0868",
+    "seq": 1154,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0027",
+    "seq": 376,
+    "value": "tcp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0859",
+    "seq": 1014
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0805",
+    "seq": 123,
+    "value": "deny"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0388",
+    "seq": 1199
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0855",
+    "seq": 500,
+    "value": "@GRP-004"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0470",
+    "seq": 81,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0829",
+    "seq": 780
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0042",
+    "seq": 572,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0867",
+    "seq": 1103,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0603",
+    "seq": 882,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0716",
+    "seq": 332,
+    "value": "icmp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0325",
+    "seq": 933
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0458",
+    "seq": 628
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0318",
+    "seq": 63,
+    "value": "permit"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0188",
+    "seq": 455,
+    "value": "@GRP-014"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0856",
+    "seq": 552,
+    "value": "@GRP-005"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0559",
+    "seq": 1076,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0722",
+    "seq": 464,
+    "value": "@GRP-030"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0383",
+    "seq": 166,
+    "value": "permit"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0834",
+    "seq": 179,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0497",
+    "seq": 1126
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0392",
+    "seq": 772
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0477",
+    "seq": 449,
+    "value": "tcp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0104",
+    "seq": 244,
+    "value": "icmp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0593",
+    "seq": 832,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0219",
+    "seq": 49,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0357",
+    "seq": 836
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0058",
+    "seq": 1005
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0483",
+    "seq": 1006,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0026",
+    "seq": 271,
+    "value": "any"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0792",
+    "seq": 68,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0152",
+    "seq": 423,
+    "value": "tcp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0476",
+    "seq": 326,
+    "value": "icmp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0564",
+    "seq": 1137,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0746",
+    "seq": 340,
+    "value": "icmp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0832",
+    "seq": 134,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0564",
+    "seq": 1138
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0710",
+    "seq": 632,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0434",
+    "seq": 168,
+    "value": "deny"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0180",
+    "seq": 465,
+    "value": "@GRP-040"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0637",
+    "seq": 842
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0392",
+    "seq": 774
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0461",
+    "seq": 609
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0390",
+    "seq": 813
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0456",
+    "seq": 905
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0881",
+    "seq": 1120
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0866",
+    "seq": 840,
+    "value": false
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0074",
+    "seq": 484,
+    "value": "@GRP-002"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0667",
+    "seq": 513,
+    "value": "@GRP-005"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0126",
+    "seq": 85,
+    "value": "deny"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0021",
+    "seq": 517,
+    "value": "@GRP-017"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0850",
+    "seq": 677,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0202",
+    "seq": 347,
+    "value": "any"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0221",
+    "seq": 1162
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0372",
+    "seq": 1225
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0835",
+    "seq": 997
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0710",
+    "seq": 633
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0860",
+    "seq": 413,
+    "value": "icmp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0670",
+    "seq": 704,
+    "value": false
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0702",
+    "seq": 600
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0362",
+    "seq": 1061,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0458",
+    "seq": 626
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0073",
+    "seq": 614
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0073",
+    "seq": 612
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0369",
+    "seq": 1043
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0292",
+    "seq": 323,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0444",
+    "seq": 604,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0811",
+    "seq": 333,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0440",
+    "seq": 1067,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0238",
+    "seq": 200,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0315",
+    "seq": 1179
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0027",
+    "seq": 375,
+    "value": "any"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0317",
+    "seq": 514,
+    "value": "@GRP-037"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0068",
+    "seq": 641
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0793",
+    "seq": 950,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0049",
+    "seq": 720,
+    "value": false
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0640",
+    "seq": 478,
+    "value": "@GRP-022"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0015",
+    "seq": 587
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0313",
+    "seq": 346,
+    "value": "udp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0069",
+    "seq": 311,
+    "value": "udp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0353",
+    "seq": 1189,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0118",
+    "seq": 582
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0139",
+    "seq": 647
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0071",
+    "seq": 236,
+    "value": "icmp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0810",
+    "seq": 363,
+    "value": "icmp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0873",
+    "seq": 725,
+    "value": true
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0755",
+    "seq": 672
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0593",
+    "seq": 833
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0594",
+    "seq": 483,
+    "value": "@GRP-027"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0669",
+    "seq": 79,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0556",
+    "seq": 694,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0348",
+    "seq": 34,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0758",
+    "seq": 173,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0133",
+    "seq": 630
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0431",
+    "seq": 240,
+    "value": "tcp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0825",
+    "seq": 958
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0332",
+    "seq": 222,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0850",
+    "seq": 679,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0411",
+    "seq": 1022
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0207",
+    "seq": 968,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0049",
+    "seq": 719
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0464",
+    "seq": 136,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0397",
+    "seq": 115,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0386",
+    "seq": 362,
+    "value": "tcp"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0534",
+    "seq": 451,
+    "value": "@GRP-013"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0304",
+    "seq": 494,
+    "value": "@GRP-033"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0384",
+    "seq": 441,
+    "value": "icmp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0516",
+    "seq": 199,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0137",
+    "seq": 619,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0789",
+    "seq": 64,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0785",
+    "seq": 1142
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0633",
+    "seq": 15,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0670",
+    "seq": 703
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0888",
+    "seq": 72,
+    "value": "permit"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0381",
+    "seq": 372,
+    "value": "icmp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0455",
+    "seq": 910,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0587",
+    "seq": 744
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0444",
+    "seq": 606,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0313",
+    "seq": 345,
+    "value": "tcp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0393",
+    "seq": 144,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0704",
+    "seq": 1174,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0510",
+    "seq": 736,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0414",
+    "seq": 665,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0825",
+    "seq": 957,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0775",
+    "seq": 1049,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0226",
+    "seq": 769
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0458",
+    "seq": 625,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0845",
+    "seq": 594,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0400",
+    "seq": 109,
+    "value": "permit"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0531",
+    "seq": 466,
+    "value": "@GRP-016"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0764",
+    "seq": 912,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0325",
+    "seq": 934,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0565",
+    "seq": 939,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0144",
+    "seq": 307,
+    "value": "tcp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0036",
+    "seq": 740
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0825",
+    "seq": 959,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0162",
+    "seq": 862
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0119",
+    "seq": 10,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0019",
+    "seq": 685
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0321",
+    "seq": 204,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0316",
+    "seq": 138,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0788",
+    "seq": 111,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0549",
+    "seq": 108,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0761",
+    "seq": 19,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0456",
+    "seq": 906,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0583",
+    "seq": 753,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0056",
+    "seq": 420,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0415",
+    "seq": 576,
+    "value": false
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0179",
+    "seq": 548,
+    "value": "@GRP-014"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0051",
+    "seq": 543,
+    "value": "@GRP-007"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0619",
+    "seq": 276,
+    "value": "tcp"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0063",
+    "seq": 974
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0069",
+    "seq": 312,
+    "value": "tcp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0297",
+    "seq": 321,
+    "value": "udp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0656",
+    "seq": 1146,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0462",
+    "seq": 142,
+    "value": "deny"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0828",
+    "seq": 470,
+    "value": "@GRP-004"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0879",
+    "seq": 733
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0058",
+    "seq": 1002,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0156",
+    "seq": 216,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0048",
+    "seq": 923,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0868",
+    "seq": 1152,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0616",
+    "seq": 715,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0550",
+    "seq": 1169,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0048",
+    "seq": 922
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0307",
+    "seq": 280,
+    "value": "tcp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0884",
+    "seq": 57,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0324",
+    "seq": 964,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0203",
+    "seq": 795,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0413",
+    "seq": 387,
+    "value": "tcp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0115",
+    "seq": 437,
+    "value": "any"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0742",
+    "seq": 217,
+    "value": "deny"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0365",
+    "seq": 479,
+    "value": "@GRP-033"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0473",
+    "seq": 70,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0229",
+    "seq": 11,
+    "value": "deny"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0556",
+    "seq": 697
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0882",
+    "seq": 988,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0714",
+    "seq": 448,
+    "value": "udp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0457",
+    "seq": 182,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0755",
+    "seq": 670
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0577",
+    "seq": 529,
+    "value": "@GRP-037"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0063",
+    "seq": 971,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0573",
+    "seq": 355,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0319",
+    "seq": 566,
+    "value": false
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0182",
+    "seq": 535,
+    "value": "@GRP-038"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0391",
+    "seq": 728,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0215",
+    "seq": 313,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0693",
+    "seq": 1129,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0558",
+    "seq": 504,
+    "value": "@GRP-010"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0859",
+    "seq": 1013,
+    "value": true
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0548",
+    "seq": 792
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0340",
+    "seq": 75,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0208",
+    "seq": 290,
+    "value": "any"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0404",
+    "seq": 937
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0755",
+    "seq": 669,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0357",
+    "seq": 837,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0389",
+    "seq": 128,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0606",
+    "seq": 425,
+    "value": "tcp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0160",
+    "seq": 259,
+    "value": "icmp"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0339",
+    "seq": 554,
+    "value": "@GRP-006"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0303",
+    "seq": 1108,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0132",
+    "seq": 398,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0456",
+    "seq": 904,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0419",
+    "seq": 656,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0867",
+    "seq": 1105,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0230",
+    "seq": 51,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0248",
+    "seq": 1221,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0111",
+    "seq": 498,
+    "value": "@GRP-039"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0741",
+    "seq": 107,
+    "value": "permit"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0732",
+    "seq": 851
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0593",
+    "seq": 834,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0124",
+    "seq": 327,
+    "value": "any"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0140",
+    "seq": 101,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0165",
+    "seq": 746,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0526",
+    "seq": 660,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0437",
+    "seq": 666,
+    "value": true
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0456",
+    "seq": 907
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0032",
+    "seq": 1181,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0067",
+    "seq": 1084,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0039",
+    "seq": 171,
+    "value": "permit"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0495",
+    "seq": 218,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0518",
+    "seq": 1034,
+    "value": false
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0581",
+    "seq": 1102
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0452",
+    "seq": 36,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0437",
+    "seq": 667
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0578",
+    "seq": 258,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0162",
+    "seq": 861,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0554",
+    "seq": 713
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0454",
+    "seq": 527,
+    "value": "@GRP-019"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0783",
+    "seq": 799,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0831",
+    "seq": 410,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0153",
+    "seq": 1001,
+    "value": false
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0483",
+    "seq": 1009
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0362",
+    "seq": 1062
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0723",
+    "seq": 120,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0514",
+    "seq": 246,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0637",
+    "seq": 843,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0704",
+    "seq": 1175
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0767",
+    "seq": 899
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0235",
+    "seq": 295,
+    "value": "any"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0081",
+    "seq": 949
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0244",
+    "seq": 175,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0766",
+    "seq": 827,
+    "value": false
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0059",
+    "seq": 461,
+    "value": "@GRP-035"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0468",
+    "seq": 557,
+    "value": "@GRP-001"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0883",
+    "seq": 489,
+    "value": "@GRP-009"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0233",
+    "seq": 1200,
+    "value": true
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0455",
+    "seq": 911
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0071",
+    "seq": 235,
+    "value": "any"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0036",
+    "seq": 742
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0857",
+    "seq": 516,
+    "value": "@GRP-026"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0585",
+    "seq": 674
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0118",
+    "seq": 581,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0399",
+    "seq": 417,
+    "value": "tcp"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0565",
+    "seq": 942
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0548",
+    "seq": 791,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0701",
+    "seq": 319,
+    "value": "icmp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0846",
+    "seq": 1087
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0587",
+    "seq": 745,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0845",
+    "seq": 596,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0620",
+    "seq": 443,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0133",
+    "seq": 631,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0072",
+    "seq": 196,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0744",
+    "seq": 1121,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0659",
+    "seq": 1091
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0239",
+    "seq": 502,
+    "value": "@GRP-038"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0280",
+    "seq": 330,
+    "value": "tcp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0359",
+    "seq": 1025
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0356",
+    "seq": 181,
+    "value": "permit"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0120",
+    "seq": 227,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0285",
+    "seq": 435,
+    "value": "tcp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0127",
+    "seq": 1114
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0419",
+    "seq": 655
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0034",
+    "seq": 526,
+    "value": "@GRP-005"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0831",
+    "seq": 409,
+    "value": "any"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0476",
+    "seq": 325,
+    "value": "any"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0237",
+    "seq": 337,
+    "value": "udp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0483",
+    "seq": 1008,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0042",
+    "seq": 571
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0691",
+    "seq": 1204,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0281",
+    "seq": 544,
+    "value": "@GRP-037"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0095",
+    "seq": 172,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0289",
+    "seq": 186,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0583",
+    "seq": 755,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0650",
+    "seq": 785,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0763",
+    "seq": 33,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0404",
+    "seq": 936,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0184",
+    "seq": 490,
+    "value": "@GRP-011"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0771",
+    "seq": 350,
+    "value": "udp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0139",
+    "seq": 646,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0757",
+    "seq": 37,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0424",
+    "seq": 900,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0265",
+    "seq": 439,
+    "value": "udp"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0150",
+    "seq": 508,
+    "value": "@GRP-034"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0349",
+    "seq": 273,
+    "value": "any"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0279",
+    "seq": 562
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0656",
+    "seq": 1147
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0428",
+    "seq": 577,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0022",
+    "seq": 855,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0378",
+    "seq": 991
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0173",
+    "seq": 454,
+    "value": "@GRP-033"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0415",
+    "seq": 575
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0768",
+    "seq": 687,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0733",
+    "seq": 58,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0081",
+    "seq": 947
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0303",
+    "seq": 1107
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0879",
+    "seq": 734,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0829",
+    "seq": 781,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0513",
+    "seq": 895,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0066",
+    "seq": 262,
+    "value": "udp"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0598",
+    "seq": 1188
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0046",
+    "seq": 6,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0248",
+    "seq": 1223,
+    "value": false
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0850",
+    "seq": 680
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0243",
+    "seq": 1208
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0183",
+    "seq": 52,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0732",
+    "seq": 850,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0487",
+    "seq": 357,
+    "value": "tcp"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0324",
+    "seq": 967
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0139",
+    "seq": 649
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0623",
+    "seq": 510,
+    "value": "@GRP-018"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0360",
+    "seq": 871,
+    "value": true
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0704",
+    "seq": 1177
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0265",
+    "seq": 440,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0815",
+    "seq": 1173,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0467",
+    "seq": 891,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0445",
+    "seq": 114,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0409",
+    "seq": 1155,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0713",
+    "seq": 238,
+    "value": "any"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0622",
+    "seq": 146,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0882",
+    "seq": 986,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0040",
+    "seq": 462,
+    "value": "@GRP-022"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0821",
+    "seq": 1070,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0860",
+    "seq": 414,
+    "value": "any"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0060",
+    "seq": 69,
+    "value": "permit"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0463",
+    "seq": 209,
+    "value": "deny"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0744",
+    "seq": 1124
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0070",
+    "seq": 875
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0401",
+    "seq": 1035,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0262",
+    "seq": 486,
+    "value": "@GRP-006"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0691",
+    "seq": 1205
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0661",
+    "seq": 507,
+    "value": "@GRP-030"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0301",
+    "seq": 214,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0058",
+    "seq": 1003
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0846",
+    "seq": 1086,
+    "value": true
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0032",
+    "seq": 1184
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0191",
+    "seq": 556,
+    "value": "@GRP-009"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0334",
+    "seq": 1192,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0372",
+    "seq": 1226,
+    "value": false
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0303",
+    "seq": 1109
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0497",
+    "seq": 1127,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0866",
+    "seq": 838,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0322",
+    "seq": 961,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0689",
+    "seq": 407,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0279",
+    "seq": 563,
+    "value": false
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0424",
+    "seq": 903
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0312",
+    "seq": 457,
+    "value": "@GRP-038"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0106",
+    "seq": 446,
+    "value": "any"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0128",
+    "seq": 268,
+    "value": "tcp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0080",
+    "seq": 944
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0233",
+    "seq": 1202,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0540",
+    "seq": 91,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0607",
+    "seq": 1011
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0137",
+    "seq": 620
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0070",
+    "seq": 876,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0176",
+    "seq": 46,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0739",
+    "seq": 139,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0359",
+    "seq": 1026,
+    "value": false
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0409",
+    "seq": 1158
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0426",
+    "seq": 763
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0381",
+    "seq": 371,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0169",
+    "seq": 681,
+    "value": true
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0585",
+    "seq": 676
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0677",
+    "seq": 76,
+    "value": "permit"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0713",
+    "seq": 237,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0185",
+    "seq": 693,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0872",
+    "seq": 370,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0006",
+    "seq": 956,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0635",
+    "seq": 822
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0036",
+    "seq": 739,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0465",
+    "seq": 1039
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0774",
+    "seq": 700,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0293",
+    "seq": 994
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0162",
+    "seq": 863,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0497",
+    "seq": 1125,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0347",
+    "seq": 383,
+    "value": "udp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0231",
+    "seq": 432,
+    "value": "icmp"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0816",
+    "seq": 491,
+    "value": "@GRP-025"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0334",
+    "seq": 1193
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0295",
+    "seq": 917,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0123",
+    "seq": 21,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0550",
+    "seq": 1168
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0859",
+    "seq": 1016
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0830",
+    "seq": 920,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0581",
+    "seq": 1099,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0850",
+    "seq": 678
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0270",
+    "seq": 422,
+    "value": "any"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0570",
+    "seq": 400,
+    "value": "any"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0255",
+    "seq": 406,
+    "value": "udp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0218",
+    "seq": 335,
+    "value": "any"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0142",
+    "seq": 202,
+    "value": "deny"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0012",
+    "seq": 458,
+    "value": "@GRP-031"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0203",
+    "seq": 794
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0406",
+    "seq": 1219
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0081",
+    "seq": 946,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0597",
+    "seq": 210,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0701",
+    "seq": 320,
+    "value": "tcp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0559",
+    "seq": 1077
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0487",
+    "seq": 358,
+    "value": "udp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0657",
+    "seq": 229,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0224",
+    "seq": 887
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0802",
+    "seq": 775,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0697",
+    "seq": 170,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0772",
+    "seq": 251,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0823",
+    "seq": 1148,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0038",
+    "seq": 104,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0408",
+    "seq": 980
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0439",
+    "seq": 381,
+    "value": "tcp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0872",
+    "seq": 369,
+    "value": "tcp"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0067",
+    "seq": 1085
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0627",
+    "seq": 234,
+    "value": "any"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0308",
+    "seq": 389,
+    "value": "icmp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0185",
+    "seq": 692
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0671",
+    "seq": 26,
+    "value": "permit"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0354",
+    "seq": 183,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0465",
+    "seq": 1038,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0335",
+    "seq": 928,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0552",
+    "seq": 176,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0440",
+    "seq": 1068
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0573",
+    "seq": 356,
+    "value": "icmp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0499",
+    "seq": 1058,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0075",
+    "seq": 159,
+    "value": "deny"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0326",
+    "seq": 460,
+    "value": "@GRP-036"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0246",
+    "seq": 177,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0248",
+    "seq": 1222
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0703",
+    "seq": 499,
+    "value": "@GRP-020"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0037",
+    "seq": 537,
+    "value": "@GRP-020"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0841",
+    "seq": 723
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0768",
+    "seq": 688
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0137",
+    "seq": 621,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0899",
+    "seq": 5,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0209",
+    "seq": 225,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0411",
+    "seq": 1021,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0115",
+    "seq": 438,
+    "value": "tcp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0727",
+    "seq": 392,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0169",
+    "seq": 683,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0047",
+    "seq": 88,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0412",
+    "seq": 853
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0616",
+    "seq": 716
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0022",
+    "seq": 856
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0503",
+    "seq": 310,
+    "value": "udp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0424",
+    "seq": 902,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0384",
+    "seq": 442,
+    "value": "tcp"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0114",
+    "seq": 540,
+    "value": "@GRP-030"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0414",
+    "seq": 663,
+    "value": true
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0159",
+    "seq": 452,
+    "value": "@GRP-027"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0898",
+    "seq": 62,
+    "value": "deny"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0793",
+    "seq": 953
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0717",
+    "seq": 804
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0360",
+    "seq": 873,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0207",
+    "seq": 969
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0202",
+    "seq": 348,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0102",
+    "seq": 759,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0324",
+    "seq": 965
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0606",
+    "seq": 426,
+    "value": "icmp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0247",
+    "seq": 983
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0247",
+    "seq": 982,
+    "value": true
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0388",
+    "seq": 1197
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0620",
+    "seq": 444,
+    "value": "icmp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0647",
+    "seq": 145,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0513",
+    "seq": 893,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0110",
+    "seq": 1065,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0224",
+    "seq": 888,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0785",
+    "seq": 1141,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0043",
+    "seq": 659,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0510",
+    "seq": 737
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0290",
+    "seq": 1211,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0402",
+    "seq": 282,
+    "value": "icmp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0330",
+    "seq": 635,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0380",
+    "seq": 143,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0399",
+    "seq": 418,
+    "value": "tcp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0784",
+    "seq": 860,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0128",
+    "seq": 267,
+    "value": "udp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0089",
+    "seq": 800,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0420",
+    "seq": 809,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0727",
+    "seq": 391,
+    "value": "icmp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0779",
+    "seq": 130,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0259",
+    "seq": 41,
+    "value": "deny"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0290",
+    "seq": 1212
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0849",
+    "seq": 536,
+    "value": "@GRP-013"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0793",
+    "seq": 951
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0018",
+    "seq": 463,
+    "value": "@GRP-029"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0375",
+    "seq": 1029
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0738",
+    "seq": 488,
+    "value": "@GRP-020"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0131",
+    "seq": 1135,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0146",
+    "seq": 302,
+    "value": "udp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0106",
+    "seq": 445,
+    "value": "tcp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0524",
+    "seq": 14,
+    "value": "permit"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0663",
+    "seq": 653
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0346",
+    "seq": 94,
+    "value": "deny"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0641",
+    "seq": 211,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0070",
+    "seq": 874,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0877",
+    "seq": 16,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0472",
+    "seq": 315,
+    "value": "any"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0065",
+    "seq": 545,
+    "value": "@GRP-011"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0121",
+    "seq": 555,
+    "value": "@GRP-029"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0286",
+    "seq": 185,
+    "value": "permit"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0013",
+    "seq": 380,
+    "value": "any"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0615",
+    "seq": 27,
+    "value": "permit"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0750",
+    "seq": 42,
+    "value": "deny"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0795",
+    "seq": 385,
+    "value": "any"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0746",
+    "seq": 339,
+    "value": "icmp"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0774",
+    "seq": 699
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0693",
+    "seq": 1131,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0052",
+    "seq": 99,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0550",
+    "seq": 1167,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0656",
+    "seq": 1144,
+    "value": true
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0212",
+    "seq": 1166
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0252",
+    "seq": 1054
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0875",
+    "seq": 9,
+    "value": "deny"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0425",
+    "seq": 519,
+    "value": "@GRP-010"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0513",
+    "seq": 894
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0493",
+    "seq": 253,
+    "value": "udp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0802",
+    "seq": 777,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0584",
+    "seq": 188,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0776",
+    "seq": 788,
+    "value": false
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0394",
+    "seq": 846
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0026",
+    "seq": 272,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0659",
+    "seq": 1092,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0435",
+    "seq": 867,
+    "value": true
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0591",
+    "seq": 206,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0143",
+    "seq": 616
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0529",
+    "seq": 191,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0721",
+    "seq": 1047
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0218",
+    "seq": 336,
+    "value": "icmp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0545",
+    "seq": 343,
+    "value": "icmp"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0705",
+    "seq": 521,
+    "value": "@GRP-032"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0428",
+    "seq": 578
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0449",
+    "seq": 429,
+    "value": "any"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0752",
+    "seq": 12,
+    "value": "permit"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0538",
+    "seq": 56,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0187",
+    "seq": 878,
+    "value": true
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0375",
+    "seq": 1031
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0290",
+    "seq": 1213,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0325",
+    "seq": 932,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0143",
+    "seq": 615,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0756",
+    "seq": 402,
+    "value": "icmp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0068",
+    "seq": 638,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0226",
+    "seq": 770,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0285",
+    "seq": 436,
+    "value": "udp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0334",
+    "seq": 1194,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0708",
+    "seq": 60,
+    "value": "deny"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0879",
+    "seq": 735
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0809",
+    "seq": 154,
+    "value": "deny"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0766",
+    "seq": 825,
+    "value": true
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0325",
+    "seq": 935
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0185",
+    "seq": 691,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0118",
+    "seq": 583,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0023",
+    "seq": 1079,
+    "value": true
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0449",
+    "seq": 430,
+    "value": "any"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0261",
+    "seq": 297,
+    "value": "any"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0355",
+    "seq": 195,
+    "value": "permit"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0201",
+    "seq": 250,
+    "value": "udp"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0624",
+    "seq": 7,
+    "value": "permit"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0395",
+    "seq": 47,
+    "value": "permit"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0029",
+    "seq": 831
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0370",
+    "seq": 1,
+    "value": "permit"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0555",
+    "seq": 493,
+    "value": "@GRP-013"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0243",
+    "seq": 1210
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0795",
+    "seq": 386,
+    "value": "any"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0131",
+    "seq": 1134
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0699",
+    "seq": 512,
+    "value": "@GRP-026"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0294",
+    "seq": 67,
+    "value": "permit"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0083",
+    "seq": 558,
+    "value": "@GRP-021"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0087",
+    "seq": 353,
+    "value": "udp"
+  },
+  {
+    "field": "source",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0660",
+    "seq": 495,
+    "value": "@GRP-022"
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0254",
+    "seq": 110,
+    "value": "permit"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0067",
+    "seq": 1082,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0841",
+    "seq": 724,
+    "value": false
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0100",
+    "seq": 265,
+    "value": "icmp"
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0003",
+    "seq": 395,
+    "value": "any"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0691",
+    "seq": 1206,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0310",
+    "seq": 32,
+    "value": "permit"
+  },
+  {
+    "kind": "restore",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0637",
+    "seq": 844
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0437",
+    "seq": 668,
+    "value": false
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0068",
+    "seq": 640,
+    "value": false
+  },
+  {
+    "field": "action",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0794",
+    "seq": 158,
+    "value": "permit"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0043",
+    "seq": 658
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0830",
+    "seq": 919
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0822",
+    "seq": 428,
+    "value": "any"
+  },
+  {
+    "kind": "retract",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0776",
+    "seq": 787
+  },
+  {
+    "field": "protocol",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0695",
+    "seq": 360,
+    "value": "icmp"
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0042",
+    "seq": 570,
+    "value": true
+  },
+  {
+    "field": "enabled",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0252",
+    "seq": 1053,
+    "value": true
+  }
+]

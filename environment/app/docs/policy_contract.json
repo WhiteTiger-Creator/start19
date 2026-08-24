@@ -1,0 +1,127 @@
+{
+  "cli": {
+    "fixed_paths": [
+      "/app/data/firewall_policy.json"
+    ],
+    "input": "--input selects the resolved rule base only; default /app/data/policy_rules.json",
+    "output_dir": "--output-dir selects the output directory; default /app/output"
+  },
+  "contract_version": "fw-policy-v1",
+  "description": "Output contract for the firewall policy compiler. Shapes, paths, field lists and sort orders only; no derivation rule lives here.",
+  "outputs": {
+    "compiled_policy": {
+      "container": "array",
+      "element_fields": [
+        "rule_id",
+        "sequence",
+        "action",
+        "protocol",
+        "source_cidrs",
+        "destination_cidrs",
+        "port_low",
+        "port_high",
+        "shadowed",
+        "shadowed_by",
+        "address_span"
+      ],
+      "path": "/app/output/compiled_policy.json",
+      "serialisation": "JSON array, two-space indent, trailing newline",
+      "sort": "ascending by sequence, then rule_id"
+    },
+    "exception_queue": {
+      "container": "jsonl",
+      "element_fields": [
+        "rule_id",
+        "reason"
+      ],
+      "path": "/app/output/exception_queue.jsonl",
+      "reasons": [
+        "inert",
+        "over_cap"
+      ],
+      "serialisation": "one compact JSON object per line, trailing newline",
+      "sort": "ascending by reason, then rule_id"
+    },
+    "summary": {
+      "container": "object",
+      "field_types": {
+        "compiled_count": "integer",
+        "deny_count": "integer",
+        "effective_default_deny_sequence": "integer",
+        "effective_max_rules": "integer",
+        "effective_port_ceiling": "integer",
+        "effective_shadow_lookback": "integer",
+        "enabled_rule_count": "integer",
+        "inert_count": "integer",
+        "permit_count": "integer",
+        "queued_count": "integer",
+        "rule_count": "integer",
+        "schema_version": "string",
+        "shadowed_count": "integer",
+        "total_source_addresses": "integer"
+      },
+      "path": "/app/output/summary.json",
+      "required_fields": [
+        "schema_version",
+        "rule_count",
+        "enabled_rule_count",
+        "inert_count",
+        "shadowed_count",
+        "compiled_count",
+        "queued_count",
+        "permit_count",
+        "deny_count",
+        "total_source_addresses",
+        "effective_max_rules",
+        "effective_port_ceiling",
+        "effective_shadow_lookback",
+        "effective_default_deny_sequence"
+      ],
+      "serialisation": "JSON object, two-space indent, trailing newline"
+    }
+  },
+  "reconciled_inputs": {
+    "policy_rules": {
+      "container": "array",
+      "path": "/app/data/policy_rules.json",
+      "record_fields": [
+        "rule_id",
+        "sequence",
+        "action",
+        "protocol",
+        "source_cidrs",
+        "destination_cidrs",
+        "port_low",
+        "port_high",
+        "enabled"
+      ],
+      "serialisation": "JSON array, two-space indent, trailing newline",
+      "sort": "ascending by sequence, then rule_id"
+    }
+  },
+  "recovery_sources": {
+    "config_journal": {
+      "container": "array",
+      "path": "/app/data/config_journal.json"
+    },
+    "object_groups": {
+      "container": "array",
+      "note": "resolved during the rule-base rebuild, not re-read at compile time",
+      "path": "/app/data/object_groups.json",
+      "record_fields": [
+        "group_id",
+        "members"
+      ]
+    },
+    "rule_snapshot": {
+      "container": "array",
+      "path": "/app/data/rule_snapshot_pre_migration.json"
+    }
+  },
+  "runtime_budget_seconds": 90,
+  "units": {
+    "address_span": "count of IPv4 addresses covered by the rule's source set",
+    "cidr": "dotted-quad IPv4 prefix with a length, network address already masked",
+    "ports": "inclusive TCP/UDP port numbers"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "default": {
+    "default_deny_sequence": 999000,
+    "max_rules": 420,
+    "max_shadow_lookback": 120,
+    "port_ceiling": 65535
+  }
+}

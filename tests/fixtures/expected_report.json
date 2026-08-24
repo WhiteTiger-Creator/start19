@@ -1,0 +1,47 @@
+{
+  "alternate": {
+    "policy_digest": "cb3cf80410a8f1d4fdf97ddfd1b8c79949892d8ac0a5aea0d71a1f51e74c3e8d",
+    "queue_digest": "f9f8c710d986d22c237bf183b752d4eeda74e550495f19c84105be961a414734",
+    "summary": {
+      "compiled_count": 421,
+      "deny_count": 149,
+      "effective_default_deny_sequence": 999000,
+      "effective_max_rules": 420,
+      "effective_port_ceiling": 65535,
+      "effective_shadow_lookback": 120,
+      "enabled_rule_count": 724,
+      "inert_count": 102,
+      "permit_count": 272,
+      "queued_count": 387,
+      "rule_count": 807,
+      "schema_version": "fw-policy-v1",
+      "shadowed_count": 64,
+      "total_source_addresses": 141499374092
+    }
+  },
+  "broken_compiler_sha256": "be5cb0d35f72ce3493833f504b175d1ec0129ce9f7728cf788ab59677480af66",
+  "primary": {
+    "policy_digest": "5d5a08a6542a6b8b887c55c5bda3279b6862c5d630befe00434ccd7b845e4443",
+    "queue_digest": "eb7a11d1d5d01daaec56a57255798d9a0782c4cfc8cdf8493dd2ecd2673f0e32",
+    "summary": {
+      "compiled_count": 421,
+      "deny_count": 142,
+      "effective_default_deny_sequence": 999000,
+      "effective_max_rules": 420,
+      "effective_port_ceiling": 65535,
+      "effective_shadow_lookback": 120,
+      "enabled_rule_count": 769,
+      "inert_count": 79,
+      "permit_count": 279,
+      "queued_count": 387,
+      "rule_count": 807,
+      "schema_version": "fw-policy-v1",
+      "shadowed_count": 102,
+      "total_source_addresses": 135491732854
+    }
+  },
+  "recovered_rule_count": 807,
+  "recovered_rules_digest": "2648a03fa1203bb52fb69b4d92ac74412a5ee75099f8a1a2957cba2668302983",
+  "rule_sources_digest": "c2746609646ac488b0d89befb7f7459df4f05a376e0be5544459a0c4a74b0423",
+  "shipped_truncated_digest": "9a66aa496e8896b723fbafaa1e6631abbfa14f6b49ba53b75616c8d14537b980"
+}
