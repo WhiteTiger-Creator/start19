@@ -192,11 +192,63 @@ def test_alternate_rule_base_matches_fixture(alternate_outputs):
     assert _digest(queue) == FIXTURE["alternate"]["queue_digest"]
 
 
+def _as_contract_layout(raw: str) -> str:
+    """The text with encoder-specific escaping normalised away.
+
+    The contract fixes the LAYOUT -- two-space indent, trailing newline -- not the
+    escape style, and the two encoders disagree: Go's json.Marshal writes `<`, `>`
+    and `&` as \\u003c, \\u003e and \\u0026 and emits non-ASCII as literal UTF-8,
+    while Python's json.dumps does the opposite on both counts. Comparing raw bytes
+    against Python's rendering would fail a correct Go compiler the moment any of
+    those characters reached a rule name, an object-group label or a comment.
+    """
+    for escaped, literal in (("\\u003c", "<"), ("\\u003e", ">"), ("\\u0026", "&")):
+        raw = raw.replace(escaped, literal)
+    return raw
+
+
+def test_the_artifacts_are_serialised_exactly_as_the_contract_states(primary_outputs):
+    """Read off the raw bytes, which every other check throws away by parsing.
+
+    The contract fixes a form for all four documents and nothing here looked at
+    one, so a run emitting the summary compactly, or the queue with an indent,
+    matched every sealed digest.
+    """
+    out_dir = primary_outputs[0]
+    spec = SPEC["outputs"]
+    for name, section in (("summary.json", "summary"),
+                          ("compiled_policy.json", "compiled_policy")):
+        raw = (out_dir / name).read_text(encoding="utf-8")
+        stated = spec[section]["serialisation"]
+        assert "two-space indent" in stated and "trailing newline" in stated, stated
+        assert raw.endswith("\n") and not raw.endswith("\n\n"), name
+        assert _as_contract_layout(raw) == json.dumps(
+            json.loads(raw), indent=2, ensure_ascii=False) + "\n", (
+            f"{name} is not the contract's two-space indent")
+
+    raw = (out_dir / "exception_queue.jsonl").read_text(encoding="utf-8")
+    assert "compact JSON object per line" in spec["exception_queue"]["serialisation"]
+    assert raw == "" or raw.endswith("\n")
+    for line in raw.splitlines():
+        assert line.strip(), "the queue carries a blank line"
+        assert _as_contract_layout(line) == json.dumps(
+            json.loads(line), separators=(",", ":"), ensure_ascii=False), (
+            "a queue line is not compact JSON")
+
+    # the rebuilt rule base is a graded artifact too, and carries its own rule
+    raw = RULES_PATH.read_text(encoding="utf-8")
+    stated = SPEC["reconciled_inputs"]["policy_rules"]["serialisation"]
+    assert "two-space indent" in stated and "trailing newline" in stated, stated
+    assert raw.endswith("\n") and not raw.endswith("\n\n")
+    assert _as_contract_layout(raw) == json.dumps(
+        json.loads(raw), indent=2, ensure_ascii=False) + "\n", (
+        "the rebuilt rule base is not the contract's two-space indent")
+
+
 def test_output_dir_contains_exactly_three_files(primary_outputs):
     """A run writes the three contracted artifacts and nothing else."""
     out_dir, _, _, _ = primary_outputs
-    assert sorted(p.name for p in out_dir.iterdir()) == [
-        "compiled_policy.json", "exception_queue.jsonl", "summary.json"]
+    assert sorted(p.name for p in out_dir.iterdir()) == sorted(OUTPUT_FILES)
 
 
 def test_summary_schema_and_types(primary_outputs):
@@ -547,49 +599,155 @@ def test_no_argument_run_writes_to_the_documented_defaults(primary_outputs):
     """
     binary = _build(WORKFLOW_PATH)
     _publish_inputs()
+    # /app is root-owned, so the run cannot replace this directory -- only empty
+    # it, which is what the instruction and the contract ask for. The contents
+    # are cleared here for the same reason.
     default_out = Path("/app/output")
-    shutil.rmtree(default_out, ignore_errors=True)
     default_out.mkdir(parents=True, exist_ok=True)
+    for stale in sorted(default_out.iterdir()):
+        stale.unlink() if stale.is_file() or stale.is_symlink() else shutil.rmtree(stale)
     os.chmod(default_out, 0o777)
+    # something for the run to clear, so the rule is exercised and not assumed
+    (default_out / "left_behind.json").write_text("{}\n", encoding="utf-8")
+    os.chmod(default_out / "left_behind.json", 0o666)
+    (default_out / "scratch").mkdir()
+    os.chmod(default_out / "scratch", 0o777)
     result = _run_agent([binary], cwd=_candidate_dir())
     assert result.returncode == 0, result.stderr
-    assert sorted(q.name for q in default_out.iterdir()) == ['compiled_policy.json', 'exception_queue.jsonl', 'summary.json']
+    assert sorted(q.name for q in default_out.iterdir()) == [
+        'compiled_policy.json', 'exception_queue.jsonl', 'summary.json'], (
+        "the run did not clear what an earlier run left in the output directory")
     _, summary, doc, queue = primary_outputs
     assert _load_json(default_out / "summary.json") == summary
     assert _digest(_load_json(default_out / "compiled_policy.json")) == _digest(doc)
     assert _digest(_load_jsonl(default_out / "exception_queue.jsonl")) == _digest(queue)
 
 
-def test_the_budget_is_enforced_by_killing_an_overrunning_run(primary_outputs):
-    """The budget is enforced, and not by timing the grading machine.
+PROBED_PATHS = [
+    "/logs/verifier/reward.txt",
+    "/tests/fixtures/expected_report.json",
+    "/tests/fixtures/contract_golden.json",
+    "/tests/test_outputs.py",
+]
 
-    Every candidate run is executed with the contract's published budget as its
-    hard timeout, so a run that overruns is killed and the suite fails. Nothing
-    compares a measured elapsed time against a threshold.
+
+def test_submitted_program_runs_unprivileged_and_cannot_reach_verifier_assets(tmp_path):
+    """The graded program runs as nobody and can neither write the reward nor read the goldens.
+
+    Separate mode keeps the sealed fixtures out of the agent's container, but this
+    suite rebuilds the agent's source and runs it HERE, where those fixtures and
+    /logs/verifier both exist. Dropping the uid is what stands between that process
+    and them, so the probe reads as well as writes. Nothing here asserts a mode or
+    an owner -- the builder assigns those -- only that the boundary holds.
     """
-    assert HARD_TIMEOUT_SEC == int(RUNTIME_BUDGET_SEC)
-    assert primary_outputs[1]["compiled_count"] > 0, "the graded run did not complete"
-
-
-
-def test_runtime_budget_is_stated_in_the_contract():
-    """The budget enforced above is the one the contract publishes."""
-    assert int(SPEC["runtime_budget_seconds"]) == int(RUNTIME_BUDGET_SEC)
-
-
-def test_submitted_program_runs_unprivileged_and_cannot_write_reward(tmp_path):
-    """The graded program runs as nobody and cannot touch the reward path."""
     probe = tmp_path / "main.go"
     probe.write_text(
         'package main\n\nimport ("fmt"; "os")\n\n'
+        'func readable(p string) bool {\n'
+        '\tf, err := os.Open(p)\n'
+        '\tif err != nil {\n\t\treturn false\n\t}\n'
+        '\tdefer f.Close()\n'
+        '\tb := make([]byte, 1)\n'
+        '\t_, err = f.Read(b)\n'
+        '\treturn err == nil\n}\n\n'
         'func main() {\n\tfmt.Println(os.Getuid())\n'
         '\terr := os.WriteFile("/logs/verifier/reward.txt", []byte("1"), 0o644)\n'
-        '\tfmt.Println(err != nil)\n}\n', encoding="utf-8")
+        '\tfmt.Println(err != nil)\n'
+        '\tfor _, p := range []string{\n'
+        '\t\t"/logs/verifier/reward.txt",\n'
+        '\t\t"/tests/fixtures/expected_report.json",\n'
+        '\t\t"/tests/fixtures/contract_golden.json",\n'
+        '\t\t"/tests/test_outputs.py",\n'
+        '\t} {\n\t\tfmt.Println(p, readable(p))\n\t}\n}\n',
+        encoding="utf-8")
     binary = _build(probe)
     result = _run_agent([binary], cwd=_candidate_dir())
-    assert result.returncode == 0, result.stderr
-    parts = result.stdout.split()
-    assert parts[0] == str(CANDIDATE_UID) and parts[1] == "true"
+    assert result.returncode == 0, (
+        f"the probe exited {result.returncode}\n"
+        f"stdout: {result.stdout[-2000:]}\nstderr: {result.stderr[-2000:]}")
+    # Every line is read as written: filtering blanks out of captured output would
+    # let a probe that printed nothing clear the reachability check, so the line
+    # count is asserted and a blank line is a failure rather than something skipped.
+    lines = result.stdout.split("\n")
+    assert lines and lines[-1] == "", "the probe's output does not end in a newline"
+    lines = lines[:-1]
+    assert len(lines) == 2 + len(PROBED_PATHS), (
+        f"the probe printed {len(lines)} lines, expected {2 + len(PROBED_PATHS)}: {lines!r}")
+    assert lines[0] == str(CANDIDATE_UID), (
+        f"the graded program ran as uid {lines[0]!r}, not {CANDIDATE_UID}")
+    assert lines[1] == "true", "the graded program could write the reward file"
+    reported = dict(line.rsplit(" ", 1) for line in lines[2:])
+    assert sorted(reported) == sorted(PROBED_PATHS), (
+        f"the probe did not report on every path: {sorted(reported)}")
+    reachable = sorted(path for path, seen in reported.items() if seen == "true")
+    assert reachable == [], (
+        "code run the way the agent's program is run can read verifier-only "
+        f"assets: {reachable}")
+
+
+def test_this_suite_defines_every_test_name_once():
+    """A repeated def silently discards the earlier body, and pytest says nothing.
+
+    Two tests bound to one name leave the first never running, with no warning.
+    This reads the module's own parse tree so the collision cannot go unnoticed.
+    """
+    tree = ast.parse(Path(__file__).read_text(encoding="utf-8"))
+    names = [node.name for node in tree.body if isinstance(node, ast.FunctionDef)]
+    repeated = sorted({n for n in names if names.count(n) > 1})
+    assert not repeated, (
+        f"these names are defined more than once, so the earlier body never runs: {repeated}")
+
+
+def test_the_compiler_is_one_go_source_compiled_from_that_file_alone():
+    """instruction.md makes the deliverable that one Go source, built on its own.
+
+    _build copies /app/workflow/compile_policy.go to a temporary directory and
+    compiles it there, so a submission split across siblings fails with an
+    undefined-symbol error that does not say why. This states the rule and names
+    the siblings when the build fails. It does not ban them: nothing else in the
+    directory can join a build that never sees the directory.
+    """
+    engine = WORKFLOW_PATH.resolve()
+    # the go tool ignores sources whose name starts with "." or "_", so the frozen
+    # copy beside the compiler is not a sibling in the sense that matters
+    siblings = sorted(q.name for q in WORKFLOW_PATH.parent.glob("*.go")
+                      if q.resolve() != engine and not q.name.startswith((".", "_")))
+    try:
+        _build(WORKFLOW_PATH)
+    except AssertionError as exc:
+        raise AssertionError(
+            f"{WORKFLOW_PATH.name} does not compile on its own, as instruction.md "
+            f"requires. Sibling sources beside it, which never join this build: "
+            f"{siblings}\n\n{exc}") from exc
+
+
+def test_a_run_writes_nothing_outside_its_output_directory():
+    """instruction.md scopes a run to its --output-dir, and nothing checked it.
+
+    Every other run here reads the artifacts by name, so a run that also dropped a
+    scratch file beside them, or in the directory it was started from, satisfied
+    all of them. This walks the whole work area afterwards.
+    """
+    binary = _build(WORKFLOW_PATH)
+    _publish_inputs()
+    work = _candidate_dir()
+    out_dir = work / "output"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    os.chmod(out_dir, 0o777)
+    staged = work / "rules.json"
+    _stage_input(RULES_PATH, staged)
+
+    before = {str(q.relative_to(work)) for q in work.rglob("*")}
+    result = _run_agent(
+        [binary, "--input", str(staged), "--output-dir", str(out_dir)], cwd=work)
+    assert result.returncode == 0, (
+        f"the run exited {result.returncode}\n"
+        f"stdout: {result.stdout[-2000:]}\nstderr: {result.stderr[-2000:]}")
+    after = {str(q.relative_to(work)) for q in work.rglob("*")}
+    written = sorted(after - before)
+    expected = sorted("output/" + n for n in OUTPUT_FILES)
+    assert written == expected, (
+        f"the run wrote outside its output directory: {sorted(set(written) - set(expected))}")
 
 
 def test_frozen_snapshot_preserved():

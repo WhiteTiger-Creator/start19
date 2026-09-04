@@ -10,6 +10,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path/filepath"
 	"sort"
 	"strconv"
 	"strings"
@@ -307,6 +308,15 @@ func main() {
 	if err := os.MkdirAll(*outputDir, 0o755); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
+	}
+
+	// Anything an earlier run left here is cleared before this run writes, so no
+	// stale artifact is passed off as part of this output. The directory itself
+	// stays: the run does not own the path it writes into.
+	if entries, err := os.ReadDir(*outputDir); err == nil {
+		for _, e := range entries {
+			os.RemoveAll(filepath.Join(*outputDir, e.Name()))
+		}
 	}
 	summary := map[string]any{
 		"schema_version":                 "fw-policy-v1",
