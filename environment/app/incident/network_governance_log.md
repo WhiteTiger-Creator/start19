@@ -84,6 +84,8 @@ The service-desk lead recorded a maintenance note against the management host. A
 
 > **Board minute (2026-03-12 - #NET-9056)** Rosa: the address total in the summary covers every row the compiled policy carries, the closing deny included, since the total is read off the policy as installed.
 
+> **Board minute (2026-03-20 - #NET-9068)** Marek: where the policy runs past its size limit the surplus is taken off the end in sequence order, the newest rules going first. The operator adds at the bottom, so the bottom is what the operator can most easily re-add.
+
 > **Board minute (2026-03-12 - #NET-9044)** Anders: the closing deny is a property of the device and is left implied; the compiled policy carries only the operator's own rules.
 
 - 2026-03-26: The capacity planner wrote up an overnight page that had cleared itself. The rule count sat a little above the running mean, entirely from a backfill. The owner acknowledged it at the same meeting.
@@ -221,6 +223,8 @@ The service-desk lead recorded a maintenance note against the management host. A
 > **Board minute (2026-06-04 - #NET-9214)** Lena: Address span, final. The span carried on a compiled rule is the sum of the sizes of the prefixes in its resolved source set, each prefix counted in full and on its own. Two prefixes that overlap, and a prefix nested inside another, are counted TWICE between them: the figure is what the rule asks the device to cover, not how many distinct addresses that comes to. The board took the union reading out because a nested pair made the reported span fall as an operator widened a rule, and the audit reads the figure as a measure of reach.
 
 > **Board minute (2026-06-06 - #NET-9218)** Rosa: Summary population, final. total_source_addresses covers the operator's own rules alone and the closing FW-DEFAULT deny is left out of it, the whole address space being an artefact of the close rather than anything an operator asked for. The deny is still a row of the compiled policy and still counts in compiled_count and in deny_count; it is the address total, and only the address total, that passes over it.
+
+> **Board minute (2026-06-08 - #NET-9222)** Marek: Cap accounting, final (revises what #NET-9198's cap COUNTS; the rest of that minute stands). The limit is on the rules the device will actually evaluate. A rule reported shadowed is one an earlier rule always matches first, so it is never evaluated and costs nothing against max_rules: it rides along inside the cap and stays in the policy where it sits, as #NET-9182 requires of it. The policy therefore closes at the point where the max_rules-th UNSHADOWED rule has been admitted, taken in sequence order, and everything from there on -- shadowed or not -- leaves the policy and is queued as `over_cap` in that same order. What stays is still an unbroken run of the rule base from the top, so a policy may carry more rows than max_rules and be inside it, and no rule it keeps ever names a shadower the cap took away. The closing deny counts against nothing, as before, and the shadow verdict is still settled before any of this, so `shadowed_count` covers every live rule an earlier rule already matched whether or not the cap kept it.
 
 - 2026-06-26: The duty engineer revisited a control the auditors had asked about. Two tickets covering the same request were merged. The entry was left as it stands at the same meeting.
 

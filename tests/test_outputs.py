@@ -363,8 +363,15 @@ def test_shadowed_rules_stay_in_the_policy(primary_outputs):
         assert r["shadowed_by"]
         assert r["rule_id"] not in queued
     displaced = {r["rule_id"] for r in queue if r["reason"] == "over_cap"}
-    assert summary["shadowed_count"] > len(flagged), "the cap displaced no shadowed rule"
     assert displaced, "the cap displaced nothing, so the count cannot be pre-cap"
+    # #NET-9222 closes the policy at the max_rules-th UNSHADOWED rule, so the run
+    # the cap kept is unbroken from the top and every shadower a surviving row
+    # names is still installed beside it
+    installed = {r["rule_id"] for r in policy}
+    for r in flagged:
+        assert r["shadowed_by"] in installed, (
+            f'{r["rule_id"]} names {r["shadowed_by"]} as its shadower, and the cap '
+            "took that rule out of the policy")
 
 
 def test_every_shadowing_claim_is_independently_confirmed(primary_outputs):
@@ -408,10 +415,18 @@ def test_both_queue_reasons_occur(primary_outputs):
 
 
 def test_the_rule_cap_actually_binds(primary_outputs):
-    """More rules survive than the cap admits, so the cap is load-bearing."""
+    """More rules survive than the cap admits, so the cap is load-bearing.
+
+    #NET-9222 counts the cap over the rules the device evaluates, so it is the
+    UNSHADOWED rows that come to exactly max_rules; the shadowed ones ride along
+    and the policy carries more rows than the cap while still being inside it.
+    """
     _, summary, policy, _ = primary_outputs
     operator_rules = [r for r in policy if r["rule_id"] != "FW-DEFAULT"]
-    assert len(operator_rules) == summary["effective_max_rules"]
+    evaluated = [r for r in operator_rules if not r["shadowed"]]
+    assert len(evaluated) == summary["effective_max_rules"]
+    assert len(operator_rules) > summary["effective_max_rules"], (
+        "no shadowed rule rode along, so the cap's accounting proves nothing here")
     assert summary["rule_count"] - summary["inert_count"] > summary["effective_max_rules"]
 
 
@@ -425,14 +440,23 @@ def _rule(rid, seq, *, action="permit", protocol="tcp", src=("10.0.0.0/8",),
             "port_low": lo, "port_high": hi, "enabled": enabled}
 
 
-def _probe(rules, *, max_rules=1000, port_ceiling=65535, lookback=120, deny_seq=999000):
-    """Run the submitted compiler over a crafted rule base and return its artifacts."""
+def _probe(rules, *, max_rules=1000, port_ceiling=65535, lookback=120, deny_seq=999000,
+           omit=()):
+    """Run the submitted compiler over a crafted rule base and return its artifacts.
+
+    `omit` names policy fields to leave OUT of the file altogether, which is how
+    #NET-9210's per-field baselines are exercised: every other caller writes all
+    four, so a compiler that read the map directly and never fell back was never
+    caught by anything here.
+    """
     saved = POLICY_PATH.read_text(encoding="utf-8")
     staged = _CWORK / f"probe-{next(_run_ctr)}.json"
     try:
-        _write_json(POLICY_PATH, {"default": {
-            "max_rules": max_rules, "port_ceiling": port_ceiling,
-            "max_shadow_lookback": lookback, "default_deny_sequence": deny_seq}})
+        default = {"max_rules": max_rules, "port_ceiling": port_ceiling,
+                   "max_shadow_lookback": lookback, "default_deny_sequence": deny_seq}
+        for field in omit:
+            del default[field]
+        _write_json(POLICY_PATH, {"default": default})
         _write_json(staged, rules)
         os.chmod(staged, 0o644)
         return _run_pipeline(input_path=staged)
@@ -581,9 +605,15 @@ def test_port_ranges_are_clamped_to_the_policy_ceiling():
 
 
 def test_the_closing_deny_is_emitted_even_once_the_cap_is_full():
-    """The cap counts the operator's rules alone; the deny is always appended."""
+    """The cap counts the operator's rules alone; the deny is always appended.
+
+    Three rules that cover no ground of each other's, so all three count against
+    the cap and it really does close on the third.
+    """
     _, summary, policy, queue = _probe([
-        _rule("FW-0001", 10), _rule("FW-0002", 20), _rule("FW-0003", 30)],
+        _rule("FW-0001", 10, src=("10.0.0.0/8",)),
+        _rule("FW-0002", 20, src=("172.16.0.0/12",)),
+        _rule("FW-0003", 30, src=("192.0.2.0/24",))],
         max_rules=2)
     assert [r["rule_id"] for r in policy] == ["FW-0001", "FW-0002", "FW-DEFAULT"]
     assert [(r["rule_id"], r["reason"]) for r in queue] == [("FW-0003", "over_cap")]
@@ -591,12 +621,79 @@ def test_the_closing_deny_is_emitted_even_once_the_cap_is_full():
 
 
 def test_the_cap_takes_the_rules_in_sequence_order():
-    """The rules the cap keeps are the earliest by sequence, not by file order."""
+    """The rules the cap sheds are the last by sequence, not the last in the file.
+
+    None of the three covers another, so every one counts against the cap and the
+    surplus comes off the end of the SEQUENCE, whatever order the file listed
+    them in.
+    """
     _, _, policy, queue = _probe([
-        _rule("FW-0003", 30), _rule("FW-0001", 10), _rule("FW-0002", 20)],
+        _rule("FW-0003", 30, src=("10.3.0.0/16",)),
+        _rule("FW-0001", 10, src=("10.1.0.0/16",)),
+        _rule("FW-0002", 20, src=("10.2.0.0/16",))],
         max_rules=2)
+    assert [r["shadowed"] for r in policy[:2]] == [False, False]
     assert [r["rule_id"] for r in policy] == ["FW-0001", "FW-0002", "FW-DEFAULT"]
     assert [r["rule_id"] for r in queue] == ["FW-0003"]
+
+
+def test_a_shadowed_rule_costs_nothing_against_the_cap_and_stays_in_the_policy():
+    """#NET-9222: the cap counts the rules the device will actually evaluate.
+
+    FW-0002 sits inside FW-0001 and is reported shadowed, so it is never reached
+    and never counted. Under the reversed draft #NET-9068, which took the surplus
+    off the end however it got there, a cap of two would have queued FW-0003 --
+    a live rule -- while the dead one rode along inside the count.
+    """
+    _, summary, policy, queue = _probe([
+        _rule("FW-0001", 10, src=("10.0.0.0/8",)),
+        _rule("FW-0002", 20, src=("10.1.0.0/16",)),
+        _rule("FW-0003", 30, src=("172.16.0.0/12",))],
+        max_rules=2)
+    assert [r["rule_id"] for r in policy] == [
+        "FW-0001", "FW-0002", "FW-0003", "FW-DEFAULT"], (
+        "a shadowed rule was counted against the cap, or was queued by it")
+    assert queue == [], queue
+    assert [r["shadowed"] for r in policy[:3]] == [False, True, False]
+    # the policy carries more rows than the cap and is still inside it
+    assert summary["compiled_count"] == 4
+    assert summary["effective_max_rules"] == 2
+    assert summary["shadowed_count"] == 1
+
+
+def test_the_cap_queues_the_unshadowed_rules_past_it_and_no_shadowed_one():
+    """Only what the device evaluates is shed, and the rest keeps its place."""
+    rules = [
+        _rule("FW-0001", 10, src=("10.0.0.0/8",)),
+        _rule("FW-0002", 20, src=("10.1.0.0/16",)),
+        _rule("FW-0003", 30, src=("172.16.0.0/12",)),
+        _rule("FW-0004", 40, src=("192.0.2.0/24",)),
+    ]
+    _, summary, policy, queue = _probe(rules, max_rules=2)
+    assert [r["rule_id"] for r in queue] == ["FW-0004"], (
+        "the cap queued something other than the unshadowed rule past it")
+    assert [(r["rule_id"], r["sequence"]) for r in policy] == [
+        ("FW-0001", 10), ("FW-0002", 20), ("FW-0003", 30), ("FW-DEFAULT", 999000)], (
+        "the rules that stayed did not keep the sequence they always had")
+    assert summary["shadowed_count"] == 1
+
+
+def test_the_cap_is_reached_on_the_unshadowed_rules_in_sequence_order():
+    """A shadowed rule between two live ones does not move where the cap falls."""
+    rules = [
+        _rule("FW-0001", 10, src=("10.0.0.0/8",)),
+        _rule("FW-0002", 20, src=("10.1.0.0/16",)),
+        _rule("FW-0003", 30, src=("10.2.0.0/16",)),
+        _rule("FW-0004", 40, src=("172.16.0.0/12",)),
+        _rule("FW-0005", 50, src=("192.0.2.0/24",)),
+    ]
+    _, summary, policy, queue = _probe(rules, max_rules=2)
+    assert summary["shadowed_count"] == 2, "the crafted base carries two shadowed rules"
+    # FW-0001 and FW-0004 are the first two the device evaluates; FW-0005 is past
+    # the cap, while the shadowed FW-0002 and FW-0003 stay where they are
+    assert [r["rule_id"] for r in policy] == [
+        "FW-0001", "FW-0002", "FW-0003", "FW-0004", "FW-DEFAULT"]
+    assert [r["rule_id"] for r in queue] == ["FW-0005"]
 
 
 # --------------------------------------------------------------------------
@@ -814,3 +911,74 @@ def test_shipped_contract_matches_the_golden_copy():
     """
     shipped = json.loads(SPEC_PATH.read_text(encoding="utf-8"))
     assert shipped == json.loads(GOLDEN_CONTRACT_PATH.read_text(encoding="utf-8"))
+
+
+# --------------------------------------------------------------------------
+# #NET-9210: what an omitted policy field falls back to, and #NET-9198 at zero
+# --------------------------------------------------------------------------
+BASELINES = {"max_rules": 420, "port_ceiling": 65535,
+             "max_shadow_lookback": 120, "default_deny_sequence": 999000}
+
+
+def test_a_policy_that_omits_every_field_keeps_all_four_baselines():
+    """#NET-9210 names a baseline per field; an empty policy takes all of them.
+
+    A compiler that read each setting straight out of the map and never fell
+    back passed every other probe here, because they all write all four fields
+    and the shipped policy carries all four. A missing key in Go reads as zero,
+    which would cap the policy at nothing, clamp every port to nought and put
+    the closing deny at sequence zero, so this run separates the two readings on
+    four counts at once.
+    """
+    rules = [_rule("FW-0001", 10), _rule("FW-0002", 20, lo=1000, hi=2000)]
+    _, summary, policy, queue = _probe(rules, omit=tuple(BASELINES))
+    assert {k: summary[f"effective_{n}"] for k, n in (
+        ("max_rules", "max_rules"), ("port_ceiling", "port_ceiling"),
+        ("max_shadow_lookback", "shadow_lookback"),
+        ("default_deny_sequence", "default_deny_sequence"))} == BASELINES, summary
+    # and the baselines are what the run actually used, not merely what it echoed
+    assert [r["rule_id"] for r in policy] == ["FW-0001", "FW-0002", "FW-DEFAULT"], (
+        "an omitted max_rules capped the policy rather than falling back to 420")
+    assert policy[-1]["sequence"] == 999000
+    assert policy[-1]["port_high"] == 65535, (
+        "an omitted port_ceiling clamped the closing deny to nought")
+    assert [r["port_high"] for r in policy[:2]] == [80, 2000], (
+        "an omitted port_ceiling clamped the operator's own ranges away")
+    assert queue == []
+
+
+def test_each_policy_field_falls_back_on_its_own():
+    """One field left out at a time, so no fallback hides behind another.
+
+    Omitting all four together would pass a compiler that fell back on only one
+    of them and read zero for the rest, provided nothing in the run depended on
+    the other three.
+    """
+    rules = [_rule("FW-0001", 10), _rule("FW-0002", 20, lo=1000, hi=2000)]
+    for field, baseline in BASELINES.items():
+        _, summary, policy, _ = _probe(rules, omit=(field,))
+        name = "shadow_lookback" if field == "max_shadow_lookback" else field
+        assert summary[f"effective_{name}"] == baseline, (
+            f"{field} left out of the policy did not fall back to {baseline}: {summary}")
+        assert [r["rule_id"] for r in policy] == [
+            "FW-0001", "FW-0002", "FW-DEFAULT"], (field, policy)
+
+
+def test_a_max_rules_of_zero_is_a_cap_of_zero_and_not_an_absent_cap():
+    """#NET-9198 names no minimum and no reading under which nought means no cap.
+
+    #NET-9210 has an OMITTED field fall back to 420, so a policy that carries a
+    zero meant the zero: every operator rule leaves the policy and is queued,
+    and the closing deny is emitted anyway, never having counted against the cap.
+    """
+    rules = [_rule("FW-0001", 10, src=("10.0.0.0/8",)),
+             _rule("FW-0002", 20, src=("172.16.0.0/12",))]
+    _, summary, policy, queue = _probe(rules, max_rules=0)
+    assert summary["effective_max_rules"] == 0
+    assert [r["rule_id"] for r in policy] == ["FW-DEFAULT"], (
+        "a cap of zero was read as no cap at all")
+    assert [(r["rule_id"], r["reason"]) for r in queue] == [
+        ("FW-0001", "over_cap"), ("FW-0002", "over_cap")]
+    assert summary["compiled_count"] == 1 and summary["deny_count"] == 1
+    assert summary["total_source_addresses"] == 0, (
+        "the closing deny's own span reached the operator total")

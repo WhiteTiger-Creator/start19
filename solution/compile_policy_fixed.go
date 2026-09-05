@@ -272,12 +272,36 @@ func main() {
 
 	// #NET-9198: the compiled policy is capped at the policy's max_rules; everything
 	// past the cap leaves the policy and is queued in sequence order.
-	if maxRules > 0 && len(compiled) > maxRules {
-		for _, row := range compiled[maxRules:] {
-			queue = append(queue, queueRow{row.RuleID, "over_cap"})
+	// #NET-9198 caps the policy at max_rules over the operator's own rules and
+	// names no minimum and no "zero means unlimited" reading, so the cap applies
+	// at every value it can take, zero included: guarding on maxRules > 0 made a
+	// cap of nought mean no cap at all, which is the opposite of what it says.
+	// #NET-9210 has an omitted field fall back to 420, so a policy that carries a
+	// zero meant the zero.
+	// #NET-9222 revises what the cap COUNTS: a rule reported shadowed is never
+	// reached by the device, so it costs nothing against max_rules and rides
+	// along inside the cap, staying where it sits as #NET-9182 requires. The
+	// policy CLOSES at the max_rules-th unshadowed rule and everything from there
+	// on is queued, shadowed or not, so what stays is an unbroken run from the
+	// top: a policy may carry more rows than max_rules and be inside it, and no
+	// row it keeps can name a shadower the cap took away.
+	installed, closed := 0, false
+	remaining := compiled[:0]
+	for _, row := range compiled {
+		if !closed && !row.Shadowed {
+			if installed == maxRules {
+				closed = true
+			} else {
+				installed++
+			}
 		}
-		compiled = compiled[:maxRules]
+		if closed {
+			queue = append(queue, queueRow{row.RuleID, "over_cap"})
+			continue
+		}
+		remaining = append(remaining, row)
 	}
+	compiled = remaining
 
 	// #NET-9218: total_source_addresses covers the operator's own rules alone, so
 	// it is summed here, before the closing deny joins the policy. The deny is

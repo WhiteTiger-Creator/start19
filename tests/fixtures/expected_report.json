@@ -1,47 +1,47 @@
 {
   "alternate": {
-    "policy_digest": "cb3cf80410a8f1d4fdf97ddfd1b8c79949892d8ac0a5aea0d71a1f51e74c3e8d",
-    "queue_digest": "f9f8c710d986d22c237bf183b752d4eeda74e550495f19c84105be961a414734",
+    "policy_digest": "4b5ace7055a85ae6df1581759c543e59d595c122e000c4f222af2a9a26b4d23f",
+    "queue_digest": "4d63f7b3adf1621fdbc5c098c665d2f3a673c424e29090e496f3b1c00834fb89",
     "summary": {
-      "compiled_count": 421,
-      "deny_count": 149,
+      "compiled_count": 447,
+      "deny_count": 158,
       "effective_default_deny_sequence": 999000,
       "effective_max_rules": 420,
       "effective_port_ceiling": 65535,
       "effective_shadow_lookback": 120,
       "enabled_rule_count": 724,
       "inert_count": 102,
-      "permit_count": 272,
-      "queued_count": 387,
+      "permit_count": 289,
+      "queued_count": 361,
       "rule_count": 807,
       "schema_version": "fw-policy-v1",
       "shadowed_count": 64,
-      "total_source_addresses": 141499374092
+      "total_source_addresses": 158889123055
     }
   },
   "broken_compiler_sha256": "be5cb0d35f72ce3493833f504b175d1ec0129ce9f7728cf788ab59677480af66",
   "primary": {
-    "policy_digest": "5d5a08a6542a6b8b887c55c5bda3279b6862c5d630befe00434ccd7b845e4443",
-    "queue_digest": "eb7a11d1d5d01daaec56a57255798d9a0782c4cfc8cdf8493dd2ecd2673f0e32",
+    "policy_digest": "e135a9c194bdc595c837323329ca2d5b99b999ec6f308df897d5e23d57393a28",
+    "queue_digest": "255d3d3ba88505e460a455f8f5399b38aa306c84b44a16c90066560f58b87922",
     "summary": {
-      "compiled_count": 421,
-      "deny_count": 142,
+      "compiled_count": 435,
+      "deny_count": 145,
       "effective_default_deny_sequence": 999000,
       "effective_max_rules": 420,
       "effective_port_ceiling": 65535,
       "effective_shadow_lookback": 120,
       "enabled_rule_count": 769,
       "inert_count": 79,
-      "permit_count": 279,
-      "queued_count": 387,
+      "permit_count": 290,
+      "queued_count": 373,
       "rule_count": 807,
       "schema_version": "fw-policy-v1",
       "shadowed_count": 102,
-      "total_source_addresses": 135491732854
+      "total_source_addresses": 139875000870
     }
   },
   "recovered_rule_count": 807,
   "recovered_rules_digest": "2648a03fa1203bb52fb69b4d92ac74412a5ee75099f8a1a2957cba2668302983",
-  "rule_sources_digest": "cc90704a09f9394e7224c30e4b54417a15e53715eec3561b1a40effc8ffd89fa",
+  "rule_sources_digest": "4fe77facb0b9321c0ee53f115162b908e22e341b79e9b93ff2ea5f19e4457c5a",
   "shipped_truncated_digest": "9a66aa496e8896b723fbafaa1e6631abbfa14f6b49ba53b75616c8d14537b980"
 }

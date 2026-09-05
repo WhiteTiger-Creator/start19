@@ -96,7 +96,15 @@
   },
   "reconciled_inputs": {
     "policy_rules": {
+      "constraints": [
+        "every sequence is a non-negative integer strictly below the policy's default_deny_sequence, so the closing deny is always the last row of the compiled policy and the contract's ascending sort holds over the whole array",
+        "FW-DEFAULT is reserved for the closing deny and is never an operator rule id",
+        "rule ids are unique within a rule base"
+      ],
       "container": "array",
+      "field_notes": {
+        "sequence": "the operator's own ordering, ascending and strictly below default_deny_sequence; the device takes the first matching rule in it"
+      },
       "path": "/app/data/policy_rules.json",
       "record_fields": [
         "rule_id",
