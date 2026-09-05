@@ -147,6 +147,10 @@ func setCovers(outer, inner []prefix) bool {
 	return true
 }
 
+// #NET-9214: the span is the sum of the prefix sizes, each counted in full and
+// on its own. The reversed draft #NET-9050 took the union, so a prefix nested in
+// another added nothing; the board put that back because the figure measures
+// what the rule asks the device to cover, not how many addresses that comes to.
 func spanOf(set []prefix) int64 {
 	var total int64
 	for _, p := range set {
@@ -275,6 +279,10 @@ func main() {
 		compiled = compiled[:maxRules]
 	}
 
+	// #NET-9218: total_source_addresses covers the operator's own rules alone, so
+	// it is summed here, before the closing deny joins the policy. The deny is
+	// still a compiled row and still a deny, so compiled_count and deny_count
+	// both take it below; the reversed draft #NET-9056 had it in the total too.
 	permitCount, denyCount := 0, 0
 	var totalAddresses int64
 	for _, row := range compiled {

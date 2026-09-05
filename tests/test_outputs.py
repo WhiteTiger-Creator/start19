@@ -268,12 +268,48 @@ def test_compiled_schema_and_ordering(primary_outputs):
     _, _, policy, _ = primary_outputs
     keys = [(r["sequence"], r["rule_id"]) for r in policy]
     assert keys == sorted(keys)
+    types = SPEC["outputs"]["compiled_policy"]["field_types"]
     for r in policy:
         assert set(r) == COMPILED_KEYS
-        assert isinstance(r["shadowed"], bool)
+        for field, kind in types.items():
+            value = r[field]
+            if kind.startswith("integer"):
+                assert isinstance(value, int) and not isinstance(value, bool), field
+            elif kind.startswith("boolean"):
+                assert isinstance(value, bool), field
+            elif kind.startswith("array"):
+                assert isinstance(value, list) and all(
+                    isinstance(v, str) for v in value), field
+            else:
+                assert isinstance(value, str), field
         assert r["action"] in {"permit", "deny"}
         assert r["port_low"] <= r["port_high"]
+        # #NET-9214 reversed the union draft #NET-9050: every prefix of the
+        # resolved source set is counted in full and on its own, so a nested pair
+        # is counted twice between them.
         assert r["address_span"] == sum(1 << (32 - _parse_cidr(c)[1]) for c in r["source_cidrs"])
+        # #NET-9218 keeps shadowed_by a string throughout; the contract names the
+        # empty string as what an unshadowed rule carries, not null.
+        assert (r["shadowed_by"] != "") == r["shadowed"], r
+
+
+def test_the_address_total_passes_over_the_closing_deny(primary_outputs):
+    """#NET-9218: the summary total covers the operator's own rules alone.
+
+    The reversed draft #NET-9056 read the total off the policy as installed, the
+    closing deny included, which is 2^32 more. The deny is still a compiled row
+    and still a deny, so this pins the boundary from both sides: the row counts
+    in compiled_count and deny_count and does not count in the address total.
+    """
+    _, summary, policy, _ = primary_outputs
+    closing = [r for r in policy if r["rule_id"] == "FW-DEFAULT"]
+    assert len(closing) == 1, "the policy does not close with a single FW-DEFAULT deny"
+    assert closing[0]["address_span"] == 1 << 32, closing[0]
+    assert summary["total_source_addresses"] == sum(
+        r["address_span"] for r in policy if r["rule_id"] != "FW-DEFAULT"), (
+        "total_source_addresses does not pass over the closing deny")
+    assert summary["compiled_count"] == len(policy)
+    assert summary["deny_count"] == sum(1 for r in policy if r["action"] == "deny")
 
 
 def test_queue_schema_and_ordering(primary_outputs):

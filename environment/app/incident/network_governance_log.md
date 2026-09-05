@@ -52,6 +52,8 @@ The service-desk lead recorded a maintenance note against the management host. A
 
 - 2026-02-16: The platform team wrote up an overnight page that had cleared itself. Storage on the staging host was extended after the export outgrew its allocation. It was noted at the weekly slot.
 
+> **Board minute (2026-03-06 - #NET-9050)** Lena: the span reported against a rule is the size of the UNION of its source prefixes, so an address that sits inside two of them is counted once and a prefix nested in another adds nothing.
+
 > **Board minute (2026-03-06 - #NET-9038)** Priya: a rule whose object group resolves to no address is treated as an unrestricted wildcard on that side, an empty group placing no constraint on the match.
 
 - 2026-03-24: The escalation desk carried a minor point forward to the next shift. A question raised on the floor was withdrawn once the entry was reread.
@@ -79,6 +81,8 @@ The service-desk lead recorded a maintenance note against the management host. A
 - 2026-03-12: The documentation owner revisited a control the auditors had asked about. Two tickets covering the same request were merged. The entry was left as it stands with no parameter change.
 
 - 2026-03-26: An on-call engineer logged a correction request from a segment owner. A failover rehearsal completed inside its window with nothing to note.
+
+> **Board minute (2026-03-12 - #NET-9056)** Rosa: the address total in the summary covers every row the compiled policy carries, the closing deny included, since the total is read off the policy as installed.
 
 > **Board minute (2026-03-12 - #NET-9044)** Anders: the closing deny is a property of the device and is left implied; the compiled policy carries only the operator's own rules.
 
@@ -213,6 +217,10 @@ The service-desk lead recorded a maintenance note against the management host. A
 - 2026-06-18: The security review group summarised a call with the appliance vendor. One segment reported a rule fewer than the week before, all of it expected.
 
 > **Board minute (2026-06-02 - #NET-9210)** Priya: Firewall policy baseline, read from /app/data/firewall_policy.json at that fixed absolute path. Any field the policy file omits keeps its baseline: max_rules = 420; port_ceiling = 65535; max_shadow_lookback = 120; default_deny_sequence = 999000.
+
+> **Board minute (2026-06-04 - #NET-9214)** Lena: Address span, final. The span carried on a compiled rule is the sum of the sizes of the prefixes in its resolved source set, each prefix counted in full and on its own. Two prefixes that overlap, and a prefix nested inside another, are counted TWICE between them: the figure is what the rule asks the device to cover, not how many distinct addresses that comes to. The board took the union reading out because a nested pair made the reported span fall as an operator widened a rule, and the audit reads the figure as a measure of reach.
+
+> **Board minute (2026-06-06 - #NET-9218)** Rosa: Summary population, final. total_source_addresses covers the operator's own rules alone and the closing FW-DEFAULT deny is left out of it, the whole address space being an artefact of the close rather than anything an operator asked for. The deny is still a row of the compiled policy and still counts in compiled_count and in deny_count; it is the address total, and only the address total, that passes over it.
 
 - 2026-06-26: The duty engineer revisited a control the auditors had asked about. Two tickets covering the same request were merged. The entry was left as it stands at the same meeting.
 

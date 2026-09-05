@@ -25,6 +25,19 @@
         "shadowed_by",
         "address_span"
       ],
+      "field_types": {
+        "action": "string",
+        "address_span": "integer",
+        "destination_cidrs": "array of string",
+        "port_high": "integer",
+        "port_low": "integer",
+        "protocol": "string",
+        "rule_id": "string",
+        "sequence": "integer",
+        "shadowed": "boolean",
+        "shadowed_by": "string, the empty string where the rule is not shadowed",
+        "source_cidrs": "array of string"
+      },
       "path": "/app/output/compiled_policy.json",
       "serialisation": "JSON array, two-space indent, trailing newline",
       "sort": "ascending by sequence, then rule_id"
@@ -122,7 +135,7 @@
   "runtime_budget_note": "guidance on the scale a run is expected to handle, not a graded ceiling: the verifier bounds its own run rather than timing this one",
   "runtime_budget_seconds": 90,
   "units": {
-    "address_span": "count of IPv4 addresses covered by the rule's source set",
+    "address_span": "a count of IPv4 addresses read off the rule's source set; how a set whose prefixes overlap is counted is a governance decision and is not settled here",
     "cidr": "dotted-quad IPv4 prefix with a length, network address already masked",
     "ports": "inclusive TCP/UDP port numbers"
   }
