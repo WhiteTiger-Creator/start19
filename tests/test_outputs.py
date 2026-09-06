@@ -678,6 +678,30 @@ def test_the_cap_queues_the_unshadowed_rules_past_it_and_no_shadowed_one():
     assert summary["shadowed_count"] == 1
 
 
+def test_the_policy_closes_on_the_capping_rule_not_on_the_next_live_one():
+    """#NET-9222 shuts the policy behind the max_rules-th unshadowed rule.
+
+    A shadowed rule rides inside the cap only while the cap is still open. Under
+    a cap of two the policy closes on FW-0003, so the shadowed FW-0004 sitting
+    right behind it is queued like any other row past the close; a run that
+    waited for the next UNSHADOWED rule before shutting would keep FW-0004,
+    which the minute does not allow.
+    """
+    rules = [
+        _rule("FW-0001", 10, src=("10.0.0.0/8",)),
+        _rule("FW-0002", 20, src=("10.1.0.0/16",)),
+        _rule("FW-0003", 30, src=("172.16.0.0/12",)),
+        _rule("FW-0004", 40, src=("172.17.0.0/16",)),
+        _rule("FW-0005", 50, src=("192.0.2.0/24",)),
+    ]
+    _, summary, policy, queue = _probe(rules, max_rules=2)
+    assert summary["shadowed_count"] == 2, "the crafted base carries two shadowed rules"
+    assert [r["rule_id"] for r in policy] == [
+        "FW-0001", "FW-0002", "FW-0003", "FW-DEFAULT"], (
+        "a shadowed rule sitting past the close was kept in the policy")
+    assert [r["rule_id"] for r in queue] == ["FW-0004", "FW-0005"]
+
+
 def test_the_cap_is_reached_on_the_unshadowed_rules_in_sequence_order():
     """A shadowed rule between two live ones does not move where the cap falls."""
     rules = [
@@ -722,6 +746,56 @@ def test_run_is_idempotent(primary_outputs):
     _, summary, policy, queue = primary_outputs
     _, s2, p2, q2 = _run_pipeline()
     assert s2 == summary and _digest(p2) == _digest(policy) and _digest(q2) == _digest(queue)
+
+
+def test_stale_contents_are_cleared_from_a_given_output_directory():
+    """The clearing rule is checked on the default path alone, not on --output-dir.
+
+    Every ordinary run here is handed a freshly made, empty output directory, so
+    a compiler whose cleanup read `if outputDir == "/app/output"` and wrote the
+    three correct artifacts into whatever it was actually given passed the whole
+    suite: the only probe that ever found anything to clear was the one that
+    passes no flags. This plants stale content in an explicit --output-dir.
+    """
+    binary = _build(WORKFLOW_PATH)
+    _publish_inputs()
+    work = _candidate_dir()
+    out_dir = work / "given-output"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    os.chmod(out_dir, 0o777)
+    stale = out_dir / "compiled_policy.json"
+    stale.write_text("[]\n", encoding="utf-8")
+    os.chmod(stale, 0o666)
+    junk = out_dir / "left_behind.json"
+    junk.write_text('{"stale": true}\n', encoding="utf-8")
+    os.chmod(junk, 0o666)
+    nested = out_dir / "scratch"
+    nested.mkdir()
+    (nested / "inner.json").write_text("{}\n", encoding="utf-8")
+    os.chmod(nested / "inner.json", 0o666)
+    os.chmod(nested, 0o777)
+    # the contract has the contents go and the directory itself stay, so the
+    # inode is taken first: a RemoveAll followed by MkdirAll fails here
+    before = out_dir.stat()
+
+    result = _run_agent([binary, "--output-dir", str(out_dir)], cwd=work)
+    assert result.returncode == 0, (
+        f"the run exited {result.returncode}\n"
+        f"stdout: {result.stdout[-2000:]}\nstderr: {result.stderr[-2000:]}")
+    assert sorted(q.name for q in out_dir.iterdir()) == [
+        "compiled_policy.json", "exception_queue.jsonl", "summary.json"], (
+        "a stale file survived into an explicitly given output directory")
+    after = out_dir.stat()
+    assert (after.st_ino, after.st_dev) == (before.st_ino, before.st_dev), (
+        "the output directory was removed and recreated rather than emptied")
+    # names and an exit code are not the deliverable: no --input is passed, so
+    # this run reads the same rule base the graded one does and owes the same
+    # three artifacts
+    assert _load_json(out_dir / "summary.json") == FIXTURE["primary"]["summary"]
+    assert _digest(_load_json(out_dir / "compiled_policy.json")) == \
+        FIXTURE["primary"]["policy_digest"]
+    assert _digest(_load_jsonl(out_dir / "exception_queue.jsonl")) == \
+        FIXTURE["primary"]["queue_digest"]
 
 
 def test_no_argument_run_writes_to_the_documented_defaults(primary_outputs):
@@ -909,8 +983,14 @@ def test_shipped_contract_matches_the_golden_copy():
     from the verifier's own image; this proves the agent's copy still agrees with
     it, so the contract cannot be trimmed to weaken a schema check.
     """
-    shipped = json.loads(SPEC_PATH.read_text(encoding="utf-8"))
-    assert shipped == json.loads(GOLDEN_CONTRACT_PATH.read_text(encoding="utf-8"))
+    # instruction.md asks for the contract byte for byte, so the bytes are what
+    # is compared: parsing both sides first accepted a re-indent or a key
+    # reordering, which is not the file coming back unchanged.
+    assert SPEC_PATH.read_bytes() == GOLDEN_CONTRACT_PATH.read_bytes(), (
+        "the shipped contract differs from the golden copy; it must come back "
+        "byte for byte, not merely parse to the same document")
+    assert json.loads(SPEC_PATH.read_text(encoding="utf-8")) == json.loads(
+        GOLDEN_CONTRACT_PATH.read_text(encoding="utf-8"))
 
 
 # --------------------------------------------------------------------------

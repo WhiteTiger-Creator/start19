@@ -285,21 +285,26 @@ func main() {
 	// on is queued, shadowed or not, so what stays is an unbroken run from the
 	// top: a policy may carry more rows than max_rules and be inside it, and no
 	// row it keeps can name a shadower the cap took away.
-	installed, closed := 0, false
+	// The close lands ON the max_rules-th unshadowed rule, not on the next one
+	// after it: a shadowed rule rides inside the cap only while the cap is still
+	// open, and once that rule is admitted the policy is shut to everything that
+	// follows. Waiting for the next unshadowed rule kept the shadowed rows that
+	// happened to sit between them, which is not what the minute says. A cap of
+	// nought is shut before the first row, so nothing at all is admitted.
+	installed, closed := 0, maxRules <= 0
 	remaining := compiled[:0]
 	for _, row := range compiled {
-		if !closed && !row.Shadowed {
-			if installed == maxRules {
-				closed = true
-			} else {
-				installed++
-			}
-		}
 		if closed {
 			queue = append(queue, queueRow{row.RuleID, "over_cap"})
 			continue
 		}
 		remaining = append(remaining, row)
+		if !row.Shadowed {
+			installed++
+			if installed == maxRules {
+				closed = true
+			}
+		}
 	}
 	compiled = remaining
 
