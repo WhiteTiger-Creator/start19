@@ -25,6 +25,9 @@
         "shadowed_by",
         "address_span"
       ],
+      "field_notes": {
+        "default_row": "the closing deny the run appends is never shadowed and names no shadower: it carries `shadowed` false and `shadowed_by` the empty string, whatever the rules above it do"
+      },
       "field_types": {
         "action": "string",
         "address_span": "integer",
@@ -58,6 +61,12 @@
     },
     "summary": {
       "container": "object",
+      "field_notes": {
+        "compiled_count": "the rows the compiled policy carries, the closing deny among them",
+        "enabled_rule_count": "the rules the rebuilt base carries with `enabled` true, counted as read and before any of them is set aside: a rule enabled but inert is counted here and by inert_count both",
+        "queued_count": "the rows the exception queue carries",
+        "rule_count": "the rules the base handed to --input carries, counted as read"
+      },
       "field_types": {
         "compiled_count": "integer",
         "deny_count": "integer",

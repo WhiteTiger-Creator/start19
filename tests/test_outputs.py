@@ -108,64 +108,20 @@ def test_object_groups_resolve_transitively_and_terminate():
 
 
 def test_wrong_recoveries_differ_from_the_governed_rule_base():
-    """Four plausible misreadings of the recovery each give a different rule base."""
+    """Four plausible misreadings of the recovery each give a different rule base.
+
+    The verifier re-derives each one itself (harness.replay_variant) rather than
+    trusting the reference, and asserts its own governed reading EQUALS the
+    sealed digest before comparing the three misreadings against it, so the
+    fixture and this reading cannot drift apart unnoticed.
+    """
     expected = FIXTURE["recovered_rules_digest"]
     assert FIXTURE["shipped_truncated_digest"] != expected
-    snapshot = {r["rule_id"]: r for r in _load_json(SNAPSHOT_PATH)}
-    journal = _load_json(JOURNAL_PATH)
-    catalogue = {g["group_id"]: g["members"] for g in _load_json(GROUPS_PATH)}
-
-    def resolve(ref, deep):
-        out = set()
-
-        def walk(gid, seen):
-            if gid in seen or gid not in catalogue:
-                return
-            seen.add(gid)
-            for m in catalogue[gid]:
-                if m.startswith("@"):
-                    if deep:
-                        walk(m[1:], seen)
-                else:
-                    b, p = _parse_cidr(m)
-                    out.add("%d.%d.%d.%d/%d" % (b >> 24 & 255, b >> 16 & 255, b >> 8 & 255, b & 255, p))
-
-        if ref.startswith("@"):
-            walk(ref[1:], set())
-        else:
-            b, p = _parse_cidr(ref)
-            out.add("%d.%d.%d.%d/%d" % (b >> 24 & 255, b >> 16 & 255, b >> 8 & 255, b & 255, p))
-        return sorted(out, key=_parse_cidr)
-
-    def replay(by_seq: bool, restore_from_snapshot: bool, deep_groups: bool):
-        live = {k: dict(v) for k, v in snapshot.items()}
-        held = {}
-        for c in (sorted(journal, key=lambda x: x["seq"]) if by_seq else journal):
-            k, kind = c["rule_id"], c["kind"]
-            if kind == "amend" and k in live:
-                live[k][c["field"]] = c["value"]
-            elif kind == "retract" and k in live:
-                held[k] = dict(live.pop(k))
-            elif kind == "restore":
-                if restore_from_snapshot:
-                    if k in snapshot and k not in live:
-                        live[k] = dict(snapshot[k])
-                elif k in held:
-                    live[k] = held.pop(k)
-        rows = []
-        for r in live.values():
-            rows.append({
-                "rule_id": r["rule_id"], "sequence": r["sequence"], "action": r["action"],
-                "protocol": r["protocol"], "source_cidrs": resolve(r["source"], deep_groups),
-                "destination_cidrs": resolve(r["destination"], deep_groups),
-                "port_low": r["port_low"], "port_high": r["port_high"], "enabled": r["enabled"]})
-        rows.sort(key=lambda r: (r["sequence"], r["rule_id"]))
-        return _digest(rows)
-
-    assert replay(True, False, True) == expected      # the governed reading
-    assert replay(False, False, True) != expected     # replayed in file order
-    assert replay(True, True, True) != expected       # restore re-reads the snapshot
-    assert replay(True, False, False) != expected     # groups expanded one level deep
+    assert replay_variant(True, False, True) == expected, (
+        "the sealed digest and this reading of the minutes have drifted apart")
+    assert replay_variant(False, False, True) != expected, "replayed in file order"
+    assert replay_variant(True, True, True) != expected, "restore re-reads the snapshot"
+    assert replay_variant(True, False, False) != expected, "groups expanded one level deep"
 
 
 # --------------------------------------------------------------------------
@@ -433,147 +389,98 @@ def test_the_rule_cap_actually_binds(primary_outputs):
 # --------------------------------------------------------------------------
 # Each reversed rule, pinned on a crafted rule base where the drafts disagree
 # --------------------------------------------------------------------------
-def _rule(rid, seq, *, action="permit", protocol="tcp", src=("10.0.0.0/8",),
-          dst=("192.168.0.0/16",), lo=80, hi=80, enabled=True):
-    return {"rule_id": rid, "sequence": seq, "action": action, "protocol": protocol,
-            "source_cidrs": list(src), "destination_cidrs": list(dst),
-            "port_low": lo, "port_high": hi, "enabled": enabled}
+# Each row is one governed reading of #NET-9186, given as the rules to compile
+# and the shadow flags the minute requires of them. Naming the reading in the id
+# keeps the failure legible without a function apiece.
+SHADOW_CASES = [
+    ("earlier_rule_covers_later",
+     [_rule("FW-0001", 10, src=("10.0.0.0/8",)),
+      _rule("FW-0002", 20, src=("10.1.2.0/24",))],
+     [(False, ""), (True, "FW-0001")]),
+    ("later_rule_covers_earlier_is_not_shadowing",
+     [_rule("FW-0001", 10, src=("10.1.2.0/24",)),
+      _rule("FW-0002", 20, src=("10.0.0.0/8",))],
+     [(False, ""), (False, "")]),
+    ("union_of_two_earlier_rules_does_not_shadow",
+     [_rule("FW-0001", 10, src=("10.0.0.0/9",)),
+      _rule("FW-0002", 20, src=("10.128.0.0/9",)),
+      _rule("FW-0003", 30, src=("10.0.0.0/8",))],
+     [(False, ""), (False, ""), (False, "")]),
+    ("every_prefix_of_the_later_rule_must_be_covered",
+     [_rule("FW-0001", 10, src=("10.0.0.0/8",)),
+      _rule("FW-0002", 20, src=("10.1.0.0/16", "172.16.0.0/12"))],
+     [(False, ""), (False, "")]),
+    ("the_destination_must_be_covered_too",
+     [_rule("FW-0001", 10, src=("10.0.0.0/8",), dst=("192.168.1.0/24",)),
+      _rule("FW-0002", 20, src=("10.1.0.0/16",), dst=("192.168.2.0/24",))],
+     [(False, ""), (False, "")]),
+    ("a_tcp_rule_does_not_shadow_a_udp_one",
+     [_rule("FW-0001", 10, protocol="tcp", src=("0.0.0.0/0",), dst=("0.0.0.0/0",),
+            lo=0, hi=65535),
+      _rule("FW-0002", 20, protocol="udp", src=("10.1.0.0/16",))],
+     [(False, ""), (False, "")]),
+    ("the_any_protocol_shadows_a_named_one",
+     [_rule("FW-0001", 10, protocol="any", src=("0.0.0.0/0",), dst=("0.0.0.0/0",),
+            lo=0, hi=65535),
+      _rule("FW-0002", 20, protocol="udp", src=("10.1.0.0/16",))],
+     [(False, ""), (True, "FW-0001")]),
+    ("the_port_range_must_be_covered",
+     [_rule("FW-0001", 10, src=("0.0.0.0/0",), dst=("0.0.0.0/0",), lo=80, hi=443),
+      _rule("FW-0002", 20, src=("10.1.0.0/16",), lo=80, hi=8080)],
+     [(False, ""), (False, "")]),
+]
 
 
-def _probe(rules, *, max_rules=1000, port_ceiling=65535, lookback=120, deny_seq=999000,
-           omit=()):
-    """Run the submitted compiler over a crafted rule base and return its artifacts.
+@pytest.mark.parametrize("label,rules,expected", SHADOW_CASES,
+                         ids=[case[0] for case in SHADOW_CASES])
+def test_shadowing_is_decided_the_way_the_minute_states(label, rules, expected):
+    """#NET-9186 on one crafted base per reading, flags and shadower alike.
 
-    `omit` names policy fields to leave OUT of the file altogether, which is how
-    #NET-9210's per-field baselines are exercised: every other caller writes all
-    four, so a compiler that read the map directly and never fell back was never
-    caught by anything here.
+    The most-specific draft would have dropped a covered rule; the governed rule
+    installs it in sequence with the flag set, so each case checks the rows that
+    stayed as well as what they were flagged.
     """
-    saved = POLICY_PATH.read_text(encoding="utf-8")
-    staged = _CWORK / f"probe-{next(_run_ctr)}.json"
-    try:
-        default = {"max_rules": max_rules, "port_ceiling": port_ceiling,
-                   "max_shadow_lookback": lookback, "default_deny_sequence": deny_seq}
-        for field in omit:
-            del default[field]
-        _write_json(POLICY_PATH, {"default": default})
-        _write_json(staged, rules)
-        os.chmod(staged, 0o644)
-        return _run_pipeline(input_path=staged)
-    finally:
-        POLICY_PATH.write_text(saved, encoding="utf-8")
+    _, summary, policy, queue = _probe(rules)
+    assert [r["rule_id"] for r in policy] == \
+        [r["rule_id"] for r in rules] + ["FW-DEFAULT"], (
+        f"{label}: a rule left the policy; shadowing flags a rule, it does not drop it")
+    assert [(r["shadowed"], r["shadowed_by"]) for r in policy[:len(rules)]] == expected, label
+    assert summary["shadowed_count"] == sum(1 for flag, _ in expected if flag), label
+    assert queue == [], label
 
 
-def test_a_rule_an_earlier_rule_covers_is_flagged_but_still_installed():
-    """The narrower later rule is reported shadowed and stays in the policy.
+# Each row is one way a rule fails to reach the policy at all under #NET-9190,
+# with the rules that should survive beside it.
+INERT_CASES = [
+    ("an_empty_source_group_is_inert_not_a_wildcard",
+     [_rule("FW-0001", 10, src=(), lo=0, hi=65535),
+      _rule("FW-0002", 20, src=("10.1.0.0/16",))],
+     ["FW-0002"]),
+    ("an_empty_destination_group_is_inert_too",
+     [_rule("FW-0001", 10, dst=())],
+     []),
+    ("a_disabled_rule_is_inert",
+     [_rule("FW-0001", 10, src=("10.0.0.0/8",), enabled=False),
+      _rule("FW-0002", 20, src=("10.1.2.0/24",))],
+     ["FW-0002"]),
+]
 
-    The most-specific draft would drop FW-0002 as redundant; the governed rule
-    installs it in sequence with the flag set.
+
+@pytest.mark.parametrize("label,rules,survivors", INERT_CASES,
+                         ids=[case[0] for case in INERT_CASES])
+def test_an_inert_rule_leaves_the_policy_and_shadows_nothing(label, rules, survivors):
+    """#NET-9190: a side that resolved to nothing matches nothing.
+
+    The wildcard interim would read an empty side as 0.0.0.0/0, install the rule
+    and let it shadow the rule behind it; the governed rule queues it as inert
+    and leaves what follows unshadowed.
     """
-    _, summary, policy, queue = _probe([
-        _rule("FW-0001", 10, src=("10.0.0.0/8",)),
-        _rule("FW-0002", 20, src=("10.1.2.0/24",))])
-    assert [r["rule_id"] for r in policy] == ["FW-0001", "FW-0002", "FW-DEFAULT"]
-    assert [(r["rule_id"], r["shadowed"], r["shadowed_by"]) for r in policy[:2]] == [
-        ("FW-0001", False, ""), ("FW-0002", True, "FW-0001")]
-    assert summary["shadowed_count"] == 1
-    assert queue == []
-
-
-def test_a_rule_only_a_later_rule_covers_is_not_shadowed():
-    """Coverage by a rule further down the sequence is not shadowing at all.
-
-    The device takes the first match, so the narrow rule at sequence 10 fires
-    before the broad one at 20 ever sees the packet.
-    """
-    _, summary, policy, _ = _probe([
-        _rule("FW-0001", 10, src=("10.1.2.0/24",)),
-        _rule("FW-0002", 20, src=("10.0.0.0/8",))])
-    assert [r["shadowed"] for r in policy[:2]] == [False, False]
-    assert summary["shadowed_count"] == 0
-
-
-def test_the_union_of_two_earlier_rules_does_not_establish_shadowing():
-    """Shadowing needs one rule that covers the lot, not two that cover it between them."""
-    _, summary, policy, _ = _probe([
-        _rule("FW-0001", 10, src=("10.0.0.0/9",)),
-        _rule("FW-0002", 20, src=("10.128.0.0/9",)),
-        _rule("FW-0003", 30, src=("10.0.0.0/8",))])
-    assert [r["shadowed"] for r in policy[:3]] == [False, False, False]
-    assert summary["shadowed_count"] == 0
-
-
-def test_containment_must_hold_on_every_prefix_of_the_later_rule():
-    """One uncovered prefix in the set is enough to defeat the claim."""
-    _, _, policy, _ = _probe([
-        _rule("FW-0001", 10, src=("10.0.0.0/8",)),
-        _rule("FW-0002", 20, src=("10.1.0.0/16", "172.16.0.0/12"))])
-    assert [r["shadowed"] for r in policy[:2]] == [False, False]
-
-
-def test_containment_must_hold_on_the_destination_as_well():
-    """A rule covered on the source but not the destination is not shadowed."""
-    _, _, policy, _ = _probe([
-        _rule("FW-0001", 10, src=("10.0.0.0/8",), dst=("192.168.1.0/24",)),
-        _rule("FW-0002", 20, src=("10.1.0.0/16",), dst=("192.168.2.0/24",))])
-    assert [r["shadowed"] for r in policy[:2]] == [False, False]
-
-
-def test_containment_must_hold_on_the_protocol():
-    """A tcp rule never shadows a udp rule, however wide its prefixes."""
-    _, _, policy, _ = _probe([
-        _rule("FW-0001", 10, protocol="tcp", src=("0.0.0.0/0",), dst=("0.0.0.0/0",), lo=0, hi=65535),
-        _rule("FW-0002", 20, protocol="udp", src=("10.1.0.0/16",))])
-    assert [r["shadowed"] for r in policy[:2]] == [False, False]
-
-
-def test_a_rule_of_any_protocol_shadows_a_specific_one():
-    """The wildcard protocol does cover a named protocol."""
-    _, _, policy, _ = _probe([
-        _rule("FW-0001", 10, protocol="any", src=("0.0.0.0/0",), dst=("0.0.0.0/0",), lo=0, hi=65535),
-        _rule("FW-0002", 20, protocol="udp", src=("10.1.0.0/16",))])
-    assert [(r["shadowed"], r["shadowed_by"]) for r in policy[:2]] == [
-        (False, ""), (True, "FW-0001")]
-
-
-def test_containment_must_hold_on_the_port_range():
-    """A rule reaching outside the earlier rule's ports is not shadowed."""
-    _, _, policy, _ = _probe([
-        _rule("FW-0001", 10, src=("0.0.0.0/0",), dst=("0.0.0.0/0",), lo=80, hi=443),
-        _rule("FW-0002", 20, src=("10.1.0.0/16",), lo=80, hi=8080)])
-    assert [r["shadowed"] for r in policy[:2]] == [False, False]
-
-
-def test_an_empty_object_group_makes_a_rule_inert_rather_than_a_wildcard():
-    """A side that resolved to nothing matches nothing and shadows nothing.
-
-    The wildcard interim would treat FW-0001 as 0.0.0.0/0, install it, and let it
-    shadow FW-0002; the governed rule queues it and leaves FW-0002 unshadowed.
-    """
-    _, summary, policy, queue = _probe([
-        _rule("FW-0001", 10, src=(), lo=0, hi=65535),
-        _rule("FW-0002", 20, src=("10.1.0.0/16",))])
-    assert [r["rule_id"] for r in policy] == ["FW-0002", "FW-DEFAULT"]
-    assert policy[0]["shadowed"] is False
-    assert [(r["rule_id"], r["reason"]) for r in queue] == [("FW-0001", "inert")]
-    assert summary["inert_count"] == 1 and summary["shadowed_count"] == 0
-
-
-def test_an_empty_destination_group_is_inert_too():
-    """Emptiness on either side is enough to make the rule inert."""
-    _, _, policy, queue = _probe([_rule("FW-0001", 10, dst=())])
-    assert [r["rule_id"] for r in policy] == ["FW-DEFAULT"]
-    assert [(r["rule_id"], r["reason"]) for r in queue] == [("FW-0001", "inert")]
-
-
-def test_a_disabled_rule_is_inert_and_shadows_nothing():
-    """A disabled rule leaves the policy and does not cover the rule behind it."""
-    _, _, policy, queue = _probe([
-        _rule("FW-0001", 10, src=("10.0.0.0/8",), enabled=False),
-        _rule("FW-0002", 20, src=("10.1.2.0/24",))])
-    assert [r["rule_id"] for r in policy] == ["FW-0002", "FW-DEFAULT"]
-    assert policy[0]["shadowed"] is False
-    assert [(r["rule_id"], r["reason"]) for r in queue] == [("FW-0001", "inert")]
+    _, summary, policy, queue = _probe(rules)
+    assert [r["rule_id"] for r in policy] == survivors + ["FW-DEFAULT"], label
+    assert all(r["shadowed"] is False for r in policy[:len(survivors)]), (
+        f"{label}: an inert rule shadowed the rule behind it")
+    assert [(r["rule_id"], r["reason"]) for r in queue] == [("FW-0001", "inert")], label
+    assert summary["inert_count"] == 1 and summary["shadowed_count"] == 0, label
 
 
 def test_the_lookback_window_bounds_the_shadow_scan():
@@ -594,130 +501,106 @@ def test_the_lookback_window_bounds_the_shadow_scan():
 
 
 def test_port_ranges_are_clamped_to_the_policy_ceiling():
-    """The ceiling is applied before any coverage question is asked."""
+    """#NET-9192, both halves of it, before any coverage question is asked.
+
+    The first half -- a high port above the ceiling comes down to it -- is what
+    FW-0002 shows. The second half needs a range sitting ENTIRELY above the
+    ceiling, which FW-0003 is: an implementation that only ever lowered the high
+    port leaves FW-0003 at (2000, 1024), a range whose low is above its high,
+    and the minute has the low brought down to the clamped high instead. Without
+    that row a one-sided clamp reads the same as the governed one everywhere
+    here and the second half of the minute goes ungraded.
+    """
     _, summary, policy, _ = _probe([
         _rule("FW-0001", 10, src=("0.0.0.0/0",), dst=("0.0.0.0/0",), lo=0, hi=65535),
-        _rule("FW-0002", 20, src=("10.1.0.0/16",), lo=900, hi=5000)],
+        _rule("FW-0002", 20, src=("10.1.0.0/16",), lo=900, hi=5000),
+        _rule("FW-0003", 30, src=("10.2.0.0/16",), lo=2000, hi=5000)],
         port_ceiling=1024)
-    assert [(r["port_low"], r["port_high"]) for r in policy] == [
-        (0, 1024), (900, 1024), (0, 1024)]
-    assert summary["shadowed_count"] == 1
+    assert [(r["rule_id"], r["port_low"], r["port_high"]) for r in policy] == [
+        ("FW-0001", 0, 1024), ("FW-0002", 900, 1024), ("FW-0003", 1024, 1024),
+        ("FW-DEFAULT", 0, 1024)], (
+        "a port range was not clamped as #NET-9192 states; a low left above the "
+        "clamped high is brought down to it")
+    assert all(r["port_low"] <= r["port_high"] for r in policy), (
+        "a row carries a port range whose low is above its high")
+    # and the clamp really does run before the coverage test: both narrow rules
+    # sit inside FW-0001's clamped range once it is applied
+    assert summary["shadowed_count"] == 2
 
 
-def test_the_closing_deny_is_emitted_even_once_the_cap_is_full():
-    """The cap counts the operator's rules alone; the deny is always appended.
-
-    Three rules that cover no ground of each other's, so all three count against
-    the cap and it really does close on the third.
-    """
-    _, summary, policy, queue = _probe([
-        _rule("FW-0001", 10, src=("10.0.0.0/8",)),
-        _rule("FW-0002", 20, src=("172.16.0.0/12",)),
-        _rule("FW-0003", 30, src=("192.0.2.0/24",))],
-        max_rules=2)
-    assert [r["rule_id"] for r in policy] == ["FW-0001", "FW-0002", "FW-DEFAULT"]
-    assert [(r["rule_id"], r["reason"]) for r in queue] == [("FW-0003", "over_cap")]
-    assert summary["compiled_count"] == 3 and summary["effective_max_rules"] == 2
-
-
-def test_the_cap_takes_the_rules_in_sequence_order():
-    """The rules the cap sheds are the last by sequence, not the last in the file.
-
-    None of the three covers another, so every one counts against the cap and the
-    surplus comes off the end of the SEQUENCE, whatever order the file listed
-    them in.
-    """
-    _, _, policy, queue = _probe([
-        _rule("FW-0003", 30, src=("10.3.0.0/16",)),
-        _rule("FW-0001", 10, src=("10.1.0.0/16",)),
-        _rule("FW-0002", 20, src=("10.2.0.0/16",))],
-        max_rules=2)
-    assert [r["shadowed"] for r in policy[:2]] == [False, False]
-    assert [r["rule_id"] for r in policy] == ["FW-0001", "FW-0002", "FW-DEFAULT"]
-    assert [r["rule_id"] for r in queue] == ["FW-0003"]
-
-
-def test_a_shadowed_rule_costs_nothing_against_the_cap_and_stays_in_the_policy():
-    """#NET-9222: the cap counts the rules the device will actually evaluate.
-
-    FW-0002 sits inside FW-0001 and is reported shadowed, so it is never reached
-    and never counted. Under the reversed draft #NET-9068, which took the surplus
-    off the end however it got there, a cap of two would have queued FW-0003 --
-    a live rule -- while the dead one rode along inside the count.
-    """
-    _, summary, policy, queue = _probe([
-        _rule("FW-0001", 10, src=("10.0.0.0/8",)),
-        _rule("FW-0002", 20, src=("10.1.0.0/16",)),
-        _rule("FW-0003", 30, src=("172.16.0.0/12",))],
-        max_rules=2)
-    assert [r["rule_id"] for r in policy] == [
-        "FW-0001", "FW-0002", "FW-0003", "FW-DEFAULT"], (
-        "a shadowed rule was counted against the cap, or was queued by it")
-    assert queue == [], queue
-    assert [r["shadowed"] for r in policy[:3]] == [False, True, False]
-    # the policy carries more rows than the cap and is still inside it
-    assert summary["compiled_count"] == 4
-    assert summary["effective_max_rules"] == 2
-    assert summary["shadowed_count"] == 1
-
-
-def test_the_cap_queues_the_unshadowed_rules_past_it_and_no_shadowed_one():
-    """Only what the device evaluates is shed, and the rest keeps its place."""
-    rules = [
-        _rule("FW-0001", 10, src=("10.0.0.0/8",)),
-        _rule("FW-0002", 20, src=("10.1.0.0/16",)),
-        _rule("FW-0003", 30, src=("172.16.0.0/12",)),
-        _rule("FW-0004", 40, src=("192.0.2.0/24",)),
-    ]
-    _, summary, policy, queue = _probe(rules, max_rules=2)
-    assert [r["rule_id"] for r in queue] == ["FW-0004"], (
-        "the cap queued something other than the unshadowed rule past it")
-    assert [(r["rule_id"], r["sequence"]) for r in policy] == [
-        ("FW-0001", 10), ("FW-0002", 20), ("FW-0003", 30), ("FW-DEFAULT", 999000)], (
-        "the rules that stayed did not keep the sequence they always had")
-    assert summary["shadowed_count"] == 1
+# #NET-9198 caps the policy and #NET-9222 revises what the cap COUNTS: a rule
+# reported shadowed is never reached by the device, so it costs nothing against
+# max_rules and rides along inside it, while the policy CLOSES on the
+# max_rules-th unshadowed rule and everything from there is queued, shadowed or
+# not. Each row below is one reading of that pair, with the rows the policy is
+# to keep and the ids the queue is to carry. Under the reversed draft #NET-9068,
+# which took the surplus off the end however it got there, several of these keep
+# a dead rule inside the count and shed a live one.
+CAP_CASES = [
+    # three rules covering no ground of each other's: every one counts, and the
+    # closing deny is appended past a cap that is already full
+    ("the_deny_is_appended_even_once_the_cap_is_full",
+     [_rule("FW-0001", 10, src=("10.0.0.0/8",)),
+      _rule("FW-0002", 20, src=("172.16.0.0/12",)),
+      _rule("FW-0003", 30, src=("192.0.2.0/24",))],
+     2, ["FW-0001", "FW-0002", "FW-DEFAULT"], ["FW-0003"], 0),
+    # the file lists them out of order; the cap sheds the last by SEQUENCE
+    ("the_cap_sheds_the_last_by_sequence_not_by_file_order",
+     [_rule("FW-0003", 30, src=("10.3.0.0/16",)),
+      _rule("FW-0001", 10, src=("10.1.0.0/16",)),
+      _rule("FW-0002", 20, src=("10.2.0.0/16",))],
+     2, ["FW-0001", "FW-0002", "FW-DEFAULT"], ["FW-0003"], 0),
+    # FW-0002 sits inside FW-0001 and is never reached, so it costs nothing and
+    # the policy carries more rows than the cap while staying inside it
+    ("a_shadowed_rule_costs_nothing_and_stays",
+     [_rule("FW-0001", 10, src=("10.0.0.0/8",)),
+      _rule("FW-0002", 20, src=("10.1.0.0/16",)),
+      _rule("FW-0003", 30, src=("172.16.0.0/12",))],
+     2, ["FW-0001", "FW-0002", "FW-0003", "FW-DEFAULT"], [], 1),
+    # only what the device evaluates is shed, and what stays keeps its place
+    ("the_cap_queues_the_unshadowed_rule_past_it",
+     [_rule("FW-0001", 10, src=("10.0.0.0/8",)),
+      _rule("FW-0002", 20, src=("10.1.0.0/16",)),
+      _rule("FW-0003", 30, src=("172.16.0.0/12",)),
+      _rule("FW-0004", 40, src=("192.0.2.0/24",))],
+     2, ["FW-0001", "FW-0002", "FW-0003", "FW-DEFAULT"], ["FW-0004"], 1),
+    # the close lands ON the second unshadowed rule, so the shadowed FW-0004
+    # sitting right behind it is queued like any other row past the close
+    ("the_policy_closes_on_the_capping_rule_not_the_next_live_one",
+     [_rule("FW-0001", 10, src=("10.0.0.0/8",)),
+      _rule("FW-0002", 20, src=("10.1.0.0/16",)),
+      _rule("FW-0003", 30, src=("172.16.0.0/12",)),
+      _rule("FW-0004", 40, src=("172.17.0.0/16",)),
+      _rule("FW-0005", 50, src=("192.0.2.0/24",))],
+     2, ["FW-0001", "FW-0002", "FW-0003", "FW-DEFAULT"], ["FW-0004", "FW-0005"], 2),
+    # a shadowed rule between two live ones does not move where the cap falls
+    ("shadowed_rules_between_live_ones_do_not_move_the_cap",
+     [_rule("FW-0001", 10, src=("10.0.0.0/8",)),
+      _rule("FW-0002", 20, src=("10.1.0.0/16",)),
+      _rule("FW-0003", 30, src=("10.2.0.0/16",)),
+      _rule("FW-0004", 40, src=("172.16.0.0/12",)),
+      _rule("FW-0005", 50, src=("192.0.2.0/24",))],
+     2, ["FW-0001", "FW-0002", "FW-0003", "FW-0004", "FW-DEFAULT"], ["FW-0005"], 2),
+]
 
 
-def test_the_policy_closes_on_the_capping_rule_not_on_the_next_live_one():
-    """#NET-9222 shuts the policy behind the max_rules-th unshadowed rule.
-
-    A shadowed rule rides inside the cap only while the cap is still open. Under
-    a cap of two the policy closes on FW-0003, so the shadowed FW-0004 sitting
-    right behind it is queued like any other row past the close; a run that
-    waited for the next UNSHADOWED rule before shutting would keep FW-0004,
-    which the minute does not allow.
-    """
-    rules = [
-        _rule("FW-0001", 10, src=("10.0.0.0/8",)),
-        _rule("FW-0002", 20, src=("10.1.0.0/16",)),
-        _rule("FW-0003", 30, src=("172.16.0.0/12",)),
-        _rule("FW-0004", 40, src=("172.17.0.0/16",)),
-        _rule("FW-0005", 50, src=("192.0.2.0/24",)),
-    ]
-    _, summary, policy, queue = _probe(rules, max_rules=2)
-    assert summary["shadowed_count"] == 2, "the crafted base carries two shadowed rules"
-    assert [r["rule_id"] for r in policy] == [
-        "FW-0001", "FW-0002", "FW-0003", "FW-DEFAULT"], (
-        "a shadowed rule sitting past the close was kept in the policy")
-    assert [r["rule_id"] for r in queue] == ["FW-0004", "FW-0005"]
-
-
-def test_the_cap_is_reached_on_the_unshadowed_rules_in_sequence_order():
-    """A shadowed rule between two live ones does not move where the cap falls."""
-    rules = [
-        _rule("FW-0001", 10, src=("10.0.0.0/8",)),
-        _rule("FW-0002", 20, src=("10.1.0.0/16",)),
-        _rule("FW-0003", 30, src=("10.2.0.0/16",)),
-        _rule("FW-0004", 40, src=("172.16.0.0/12",)),
-        _rule("FW-0005", 50, src=("192.0.2.0/24",)),
-    ]
-    _, summary, policy, queue = _probe(rules, max_rules=2)
-    assert summary["shadowed_count"] == 2, "the crafted base carries two shadowed rules"
-    # FW-0001 and FW-0004 are the first two the device evaluates; FW-0005 is past
-    # the cap, while the shadowed FW-0002 and FW-0003 stay where they are
-    assert [r["rule_id"] for r in policy] == [
-        "FW-0001", "FW-0002", "FW-0003", "FW-0004", "FW-DEFAULT"]
-    assert [r["rule_id"] for r in queue] == ["FW-0005"]
+@pytest.mark.parametrize("label,rules,cap,kept,queued,shadowed", CAP_CASES,
+                         ids=[case[0] for case in CAP_CASES])
+def test_the_cap_counts_only_what_the_device_evaluates(label, rules, cap, kept,
+                                                       queued, shadowed):
+    """#NET-9198 as #NET-9222 revises it, one crafted base per reading."""
+    _, summary, policy, queue = _probe(rules, max_rules=cap)
+    assert summary["shadowed_count"] == shadowed, (
+        f"{label}: the crafted base carries {shadowed} shadowed rules")
+    assert [r["rule_id"] for r in policy] == kept, label
+    assert [(r["rule_id"], r["reason"]) for r in queue] == [
+        (rid, "over_cap") for rid in queued], label
+    assert summary["effective_max_rules"] == cap, label
+    assert summary["compiled_count"] == len(kept), label
+    # the rows that stayed keep the sequence they always had
+    by_id = {r["rule_id"]: r["sequence"] for r in rules}
+    assert all(row["sequence"] == by_id[row["rule_id"]]
+               for row in policy if row["rule_id"] in by_id), label
 
 
 # --------------------------------------------------------------------------
@@ -848,25 +731,7 @@ def test_submitted_program_runs_unprivileged_and_cannot_reach_verifier_assets(tm
     an owner -- the builder assigns those -- only that the boundary holds.
     """
     probe = tmp_path / "main.go"
-    probe.write_text(
-        'package main\n\nimport ("fmt"; "os")\n\n'
-        'func readable(p string) bool {\n'
-        '\tf, err := os.Open(p)\n'
-        '\tif err != nil {\n\t\treturn false\n\t}\n'
-        '\tdefer f.Close()\n'
-        '\tb := make([]byte, 1)\n'
-        '\t_, err = f.Read(b)\n'
-        '\treturn err == nil\n}\n\n'
-        'func main() {\n\tfmt.Println(os.Getuid())\n'
-        '\terr := os.WriteFile("/logs/verifier/reward.txt", []byte("1"), 0o644)\n'
-        '\tfmt.Println(err != nil)\n'
-        '\tfor _, p := range []string{\n'
-        '\t\t"/logs/verifier/reward.txt",\n'
-        '\t\t"/tests/fixtures/expected_report.json",\n'
-        '\t\t"/tests/fixtures/contract_golden.json",\n'
-        '\t\t"/tests/test_outputs.py",\n'
-        '\t} {\n\t\tfmt.Println(p, readable(p))\n\t}\n}\n',
-        encoding="utf-8")
+    probe.write_text(ISOLATION_PROBE_SOURCE, encoding="utf-8")
     binary = _build(probe)
     result = _run_agent([binary], cwd=_candidate_dir())
     assert result.returncode == 0, (

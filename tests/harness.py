@@ -373,8 +373,129 @@ def _run_pipeline(script_path: Path = WORKFLOW_PATH, input_path: Path = RULES_PA
             _load_jsonl(out_dir / "exception_queue.jsonl"))
 
 
+def _rule(rid, seq, *, action="permit", protocol="tcp", src=("10.0.0.0/8",),
+          dst=("192.168.0.0/16",), lo=80, hi=80, enabled=True):
+    return {"rule_id": rid, "sequence": seq, "action": action, "protocol": protocol,
+            "source_cidrs": list(src), "destination_cidrs": list(dst),
+            "port_low": lo, "port_high": hi, "enabled": enabled}
+
+
+def _probe(rules, *, max_rules=1000, port_ceiling=65535, lookback=120, deny_seq=999000,
+           omit=()):
+    """Run the submitted compiler over a crafted rule base and return its artifacts.
+
+    `omit` names policy fields to leave OUT of the file altogether, which is how
+    #NET-9210's per-field baselines are exercised: every other caller writes all
+    four, so a compiler that read the map directly and never fell back was never
+    caught by anything here.
+    """
+    saved = POLICY_PATH.read_text(encoding="utf-8")
+    staged = _CWORK / f"probe-{next(_run_ctr)}.json"
+    try:
+        default = {"max_rules": max_rules, "port_ceiling": port_ceiling,
+                   "max_shadow_lookback": lookback, "default_deny_sequence": deny_seq}
+        for field in omit:
+            del default[field]
+        _write_json(POLICY_PATH, {"default": default})
+        _write_json(staged, rules)
+        os.chmod(staged, 0o644)
+        return _run_pipeline(input_path=staged)
+    finally:
+        POLICY_PATH.write_text(saved, encoding="utf-8")
+
+
+# The probe the isolation test compiles and runs as the candidate uid: it reports
+# its own uid, whether it could write the reward file, and whether it could read
+# each sealed verifier asset.
+ISOLATION_PROBE_SOURCE = (
+        'package main\n\nimport ("fmt"; "os")\n\n'
+        'func readable(p string) bool {\n'
+        '\tf, err := os.Open(p)\n'
+        '\tif err != nil {\n\t\treturn false\n\t}\n'
+        '\tdefer f.Close()\n'
+        '\tb := make([]byte, 1)\n'
+        '\t_, err = f.Read(b)\n'
+        '\treturn err == nil\n}\n\n'
+        'func main() {\n\tfmt.Println(os.Getuid())\n'
+        '\terr := os.WriteFile("/logs/verifier/reward.txt", []byte("1"), 0o644)\n'
+        '\tfmt.Println(err != nil)\n'
+        '\tfor _, p := range []string{\n'
+        '\t\t"/logs/verifier/reward.txt",\n'
+        '\t\t"/tests/fixtures/expected_report.json",\n'
+        '\t\t"/tests/fixtures/contract_golden.json",\n'
+        '\t\t"/tests/test_outputs.py",\n'
+        '\t} {\n\t\tfmt.Println(p, readable(p))\n\t}\n}\n')
+
+
+def replay_variant(by_seq: bool, restore_from_snapshot: bool, deep_groups: bool) -> str:
+    """Re-derive the rule base under one reading of the recovery and digest it.
+
+    The verifier's own reading, independent of the reference: `by_seq` replays in
+    ascending seq rather than file order, `restore_from_snapshot` re-reads the
+    snapshot on a restoration rather than returning the held state, and
+    `deep_groups` expands an object group transitively rather than one level.
+    Passing all three gives the governed reading; each of the others is a
+    plausible misreading the graded digest must not match.
+    """
+    snapshot = {r["rule_id"]: r for r in _load_json(SNAPSHOT_PATH)}
+    journal = _load_json(JOURNAL_PATH)
+    catalogue = {g["group_id"]: g["members"] for g in _load_json(GROUPS_PATH)}
+
+    def resolve(ref, deep):
+        out = set()
+
+        def walk(gid, seen):
+            if gid in seen or gid not in catalogue:
+                return
+            seen.add(gid)
+            for m in catalogue[gid]:
+                if m.startswith("@"):
+                    if deep:
+                        walk(m[1:], seen)
+                else:
+                    b, p = _parse_cidr(m)
+                    out.add("%d.%d.%d.%d/%d" % (b >> 24 & 255, b >> 16 & 255, b >> 8 & 255, b & 255, p))
+
+        if ref.startswith("@"):
+            walk(ref[1:], set())
+        else:
+            b, p = _parse_cidr(ref)
+            out.add("%d.%d.%d.%d/%d" % (b >> 24 & 255, b >> 16 & 255, b >> 8 & 255, b & 255, p))
+        return sorted(out, key=_parse_cidr)
+
+    def replay(by_seq: bool, restore_from_snapshot: bool, deep_groups: bool):
+        live = {k: dict(v) for k, v in snapshot.items()}
+        held = {}
+        for c in (sorted(journal, key=lambda x: x["seq"]) if by_seq else journal):
+            k, kind = c["rule_id"], c["kind"]
+            if kind == "amend" and k in live:
+                live[k][c["field"]] = c["value"]
+            elif kind == "retract" and k in live:
+                held[k] = dict(live.pop(k))
+            elif kind == "restore":
+                if restore_from_snapshot:
+                    if k in snapshot and k not in live:
+                        live[k] = dict(snapshot[k])
+                elif k in held:
+                    live[k] = held.pop(k)
+        rows = []
+        for r in live.values():
+            rows.append({
+                "rule_id": r["rule_id"], "sequence": r["sequence"], "action": r["action"],
+                "protocol": r["protocol"], "source_cidrs": resolve(r["source"], deep_groups),
+                "destination_cidrs": resolve(r["destination"], deep_groups),
+                "port_low": r["port_low"], "port_high": r["port_high"], "enabled": r["enabled"]})
+        rows.sort(key=lambda r: (r["sequence"], r["rule_id"]))
+        return _digest(rows)
+    return replay(by_seq, restore_from_snapshot, deep_groups)
+
+
 __all__ = [
     "GOLDEN_CONTRACT_PATH",
+    "replay_variant",
+    "ISOLATION_PROBE_SOURCE",
+    "_rule",
+    "_probe",
     "annotations",
     "hashlib",
     "json",
