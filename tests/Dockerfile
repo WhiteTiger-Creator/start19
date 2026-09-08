@@ -14,20 +14,12 @@ ENV PATH=/usr/local/go/bin:$PATH \
 
 # Verifier dependencies, baked in (no network at trial time). The submitted Go
 # source is recompiled here, so the toolchain is verifier-side too; grading uses
-# the stdlib plus pytest.
-RUN set -eu; \
-    delay=5; \
-    for attempt in 1 2 3 4; do \
-        if pip install --no-cache-dir --timeout 30 --retries 3 \
-                pytest==8.4.1 \
-                pytest-json-ctrf==0.3.5; then \
-            exit 0; \
-        fi; \
-        echo "pip attempt ${attempt} failed, retrying in ${delay}s" >&2; \
-        sleep "${delay}"; \
-        delay=$((delay * 2)); \
-    done; \
-    exit 1
+# the stdlib plus pytest. Retries are pip's own rather than a shell loop wrapped
+# around it: the loop put shell words on the same command as the install, where a
+# scan for unpinned dependencies read them as package names.
+RUN pip install --no-cache-dir --retries=5 --timeout=60 \
+        pytest==8.4.1 \
+        pytest-json-ctrf==0.3.5
 
 # Landing directory for the declared artifact (/app) collected from the agent's
 # environment. Its parent must exist in the verifier image before the copy.

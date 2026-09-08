@@ -793,6 +793,90 @@ def test_the_compiler_is_one_go_source_compiled_from_that_file_alone():
             f"{siblings}\n\n{exc}") from exc
 
 
+# Everything the environment ships under /app, by path relative to it. The rule
+# base at data/policy_rules.json is on the list because the agent REBUILDS that
+# shipped path rather than adding one; anything under /app not named here is the
+# submission's own addition, which the probe below takes away.
+SHIPPED_UNDER_APP = frozenset({
+    "data/rule_snapshot_pre_migration.json",
+    "data/config_journal.json",
+    "data/policy_rules.json",
+    "data/object_groups.json",
+    "data/firewall_policy.json",
+    "docs/policy_contract.json",
+    "incident/network_governance_log.md",
+    "workflow/compile_policy.go",
+    "workflow/.compile_policy.original.go",
+})
+
+
+def test_the_compiled_program_carries_the_whole_implementation():
+    """instruction.md makes that one Go source the whole implementation.
+
+    Compiling from a temporary copy stops a SIBLING GO SOURCE joining the build,
+    and nothing more: a submission could leave the recovery and the compilation in
+    /app/workflow/helper.py and ship a compile_policy.go that forwards os.Args to
+    /usr/local/bin/python3, and every check here passed it. The wrapper builds, the
+    interpreter is in the verifier image, and _publish_inputs opens the helper to
+    the candidate uid along with everything else under /app.
+
+    /app is the only thing carried across from the agent's container, so it is the
+    only place such a helper can be. Every file under /app that the environment did
+    not ship is moved out of reach for one run, and the run has to produce the
+    sealed artifacts anyway. A program that is genuinely the one source notices
+    nothing; one that reaches outside it has nothing left to reach.
+    """
+    binary = _build(WORKFLOW_PATH)
+    withheld = sorted(
+        path.relative_to(APP).as_posix() for path in APP.rglob("*")
+        if not path.is_dir() and not path.is_symlink()
+        and path.relative_to(APP).as_posix() not in SHIPPED_UNDER_APP
+        and not path.relative_to(APP).as_posix().startswith("output/"))
+    holding = Path(tempfile.mkdtemp(prefix="withheld_"))
+    os.chmod(holding, 0o700)
+    try:
+        for rel in withheld:
+            target = holding / rel
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.move(str(APP / rel), str(target))
+        _publish_inputs()
+        work = _candidate_dir()
+        out_dir = work / "output"
+        out_dir.mkdir(parents=True, exist_ok=True)
+        os.chmod(out_dir, 0o777)
+        staged = work / "rules.json"
+        _stage_input(RULES_PATH, staged)
+        result = _run_agent(
+            [binary, "--input", str(staged), "--output-dir", str(out_dir)], cwd=work)
+        assert result.returncode == 0, (
+            f"the run exited {result.returncode} with these files withheld: "
+            f"{withheld}\nstdout: {result.stdout[-2000:]}\n"
+            f"stderr: {result.stderr[-2000:]}")
+        missing = [n for n in OUTPUT_FILES if not (out_dir / n).is_file()]
+        assert not missing, (
+            f"the run wrote {missing} nowhere with these files withheld: {withheld}")
+        summary = _load_json(out_dir / "summary.json")
+        policy = _load_json(out_dir / "compiled_policy.json")
+        queue = _load_jsonl(out_dir / "exception_queue.jsonl")
+    finally:
+        # put every one of them back, whatever happened above, so the digest and
+        # byte-for-byte checks elsewhere still read the tree the agent left
+        for rel in withheld:
+            source = holding / rel
+            if source.exists():
+                (APP / rel).parent.mkdir(parents=True, exist_ok=True)
+                shutil.move(str(source), str(APP / rel))
+        shutil.rmtree(holding, ignore_errors=True)
+    note = (f" with these files withheld: {withheld}" if withheld else
+            " though the submission added no file under /app at all")
+    assert summary == FIXTURE["primary"]["summary"], (
+        "the run did not reproduce the sealed summary" + note)
+    assert _digest(policy) == FIXTURE["primary"]["policy_digest"], (
+        "the compiled policy changed" + note)
+    assert _digest(queue) == FIXTURE["primary"]["queue_digest"], (
+        "the exception queue changed" + note)
+
+
 def test_a_run_writes_nothing_outside_its_output_directory():
     """instruction.md scopes a run to its --output-dir, and nothing checked it.
 
