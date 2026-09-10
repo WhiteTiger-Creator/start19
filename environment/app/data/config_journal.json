@@ -9240,5 +9240,13 @@
     "rule_id": "FW-0252",
     "seq": 1053,
     "value": true
+  },
+  {
+    "field": "sequence",
+    "kind": "amend",
+    "posted_by": "config-migration",
+    "rule_id": "FW-0004",
+    "seq": 1228,
+    "value": 5
   }
 ]

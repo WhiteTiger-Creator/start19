@@ -93,6 +93,14 @@ func setField(r *rawRule, field string, value any) {
 		if n, ok := value.(float64); ok {
 			r.PortHigh = int(n)
 		}
+	case "sequence":
+		// The recovered shape carries `sequence` among its nine rule fields, so
+		// an amendment may name it like any other. Leaving it out of this switch
+		// dropped such a change on the floor and, since the rebuilt base is
+		// ordered by sequence, silently reordered the result as well.
+		if n, ok := value.(float64); ok {
+			r.Sequence = int(n)
+		}
 	}
 }
 

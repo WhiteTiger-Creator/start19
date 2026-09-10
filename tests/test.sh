@@ -8,10 +8,11 @@ chmod 700 /logs/verifier
 echo 0 > /logs/verifier/reward.txt
 chmod 600 /logs/verifier/reward.txt
 
-TEST_DIR="${TEST_DIR:-/tests}"
-
+# The suite is named outright rather than through an environment variable: a
+# TEST_DIR left in the environment would otherwise choose what gets graded, and
+# a value naming no test file turns a passing submission into reward 0.
 python -m pytest -o cache_dir=/tmp/pytest_cache \
-  --ctrf /logs/verifier/ctrf.json "$TEST_DIR/test_outputs.py" -rA
+  --ctrf /logs/verifier/ctrf.json /tests/test_outputs.py -rA
 rc=$?
 
 # Nothing the graded programs left running is alive when the reward is written.

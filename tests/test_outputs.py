@@ -40,6 +40,33 @@ def test_recovered_rules_carry_only_the_declared_fields():
         assert set(row) == RULE_KEYS
 
 
+def test_an_amendment_naming_the_sequence_field_is_applied():
+    """`sequence` is one of the nine recovered fields, so an amend may name it.
+
+    A replay that dispatched only on the fields the journal happened to amend
+    elsewhere -- action, protocol, source, enabled and the ports -- dropped this
+    one silently, and because the rebuilt base is ordered by sequence the row
+    then came back in the wrong place as well as with the wrong value. The
+    journal moves FW-0004 to sequence 5, which is below every sequence the
+    snapshot carries, so the amendment decides both the value and the position.
+    """
+    journal = _load_json(JOURNAL_PATH)
+    amend = [c for c in journal if c.get("field") == "sequence"]
+    assert amend, "no journal row amends a sequence, so this proves nothing"
+    rows = {r["rule_id"]: r for r in _load_json(RULES_PATH)}
+    for change in amend:
+        rule_id = change["rule_id"]
+        assert rule_id in rows, (
+            f"{rule_id} left the rule base, though nothing retracts it")
+        assert rows[rule_id]["sequence"] == change["value"], (
+            f"{rule_id} carries sequence {rows[rule_id]['sequence']}, not the "
+            f"{change['value']} the journal amends it to")
+    ordered = _load_json(RULES_PATH)
+    assert ordered[0]["rule_id"] == amend[0]["rule_id"], (
+        "the amended rule does not open the rule base, though its new sequence "
+        "is below every other")
+
+
 def test_recovered_rule_base_is_sorted():
     """The rule base ascends by sequence, then rule id."""
     rows = _load_json(RULES_PATH)
@@ -877,12 +904,152 @@ def test_the_compiled_program_carries_the_whole_implementation():
         "the exception queue changed" + note)
 
 
-def test_a_run_writes_nothing_outside_its_output_directory():
+_ABSENT = object()
+
+
+def _writable_roots(work: Path) -> list:
+    """Every directory the unprivileged run could drop a file into.
+
+    Discovered rather than named: the run's own work area, the HOME it is handed,
+    the agent tree under /app, every writable tmpfs the mount table carries, and
+    every world-writable directory within two levels of the root. /proc and /sys
+    carry no candidate writes and are expensive to walk; /dev is world-writable in
+    an ordinary container, so scanning it would swallow the whole device tree --
+    the tmpfs mounts beneath it are picked up from the mount table instead.
+    """
+    roots = {work, Path(CHILD_ENV["HOME"]), Path("/tmp"), Path("/var/tmp"),
+             Path("/dev/shm"), Path("/run"), Path("/var/lock"), APP}
+    try:
+        for line in Path("/proc/mounts").read_text(encoding="utf-8").splitlines():
+            parts = line.split()
+            if len(parts) >= 3 and parts[2] in ("tmpfs", "ramfs"):
+                roots.add(Path(parts[1]))
+    except OSError:
+        pass
+    for depth_one in Path("/").iterdir():
+        if str(depth_one) in ("/proc", "/sys", "/dev") or depth_one.is_symlink() \
+                or not depth_one.is_dir():
+            continue
+        try:
+            entries = [depth_one] + [q for q in depth_one.iterdir()
+                                     if q.is_dir() and not q.is_symlink()]
+        except OSError:
+            continue
+        for entry in entries:
+            try:
+                if entry.stat().st_mode & stat.S_IWOTH:
+                    roots.add(entry)
+            except OSError:
+                continue
+    ordered = sorted(roots, key=lambda q: len(str(q)))
+    kept: list = []
+    for root in ordered:
+        if not any(str(root).startswith(str(k) + "/") for k in kept):
+            kept.append(root)
+    return kept
+
+
+# Names an implementation could be handed off to. Only those the image carries
+# are used; the point is not an exhaustive list of every interpreter that exists
+# but that the ones a submission would reach for are shut for one run.
+_INTERPRETER_NAMES = (
+    "python3", "python3.13", "python3.12", "python", "perl", "ruby", "node",
+    "sh", "bash", "dash", "busybox", "awk", "gawk", "mawk", "php", "tclsh", "lua",
+)
+_INTERPRETER_DIRS = ("/usr/local/bin", "/usr/bin", "/bin", "/usr/local/sbin",
+                     "/usr/sbin", "/sbin")
+
+
+def _reachable_interpreters() -> list:
+    """Interpreters on this image the unprivileged run could execute."""
+    found = {}
+    for directory in _INTERPRETER_DIRS:
+        for name in _INTERPRETER_NAMES:
+            path = Path(directory) / name
+            try:
+                st = path.stat()
+            except OSError:
+                continue
+            if not path.is_file() or not st.st_mode & stat.S_IXOTH:
+                continue
+            found[str(path.resolve())] = (path, st.st_mode)
+    return sorted(found.values(), key=lambda pair: str(pair[0]))
+
+
+def test_the_compiled_program_does_the_work_itself():
+    """instruction.md says the compiled program never hands the run off.
+
+    Withholding the files the submission added under /app is not enough on its
+    own. A single `package main` can carry a complete implementation in another
+    language as a string constant, write it wherever it likes at run time or
+    simply pass it on the command line, and exec an interpreter -- no helper file
+    under /app, nothing for the withholding walk to take away. A wrapper can also
+    copy a helper into the HOME it is handed on an earlier run and use that copy
+    after the original is withheld, since that directory outlives a single run.
+
+    Both need an interpreter they can reach. Every one this image carries is
+    closed to the candidate uid for the length of one run -- root keeps them, so
+    the suite itself is unaffected -- and the sealed artifacts still have to come
+    out. A program that does the work in Go notices nothing.
+    """
+    binary = _build(WORKFLOW_PATH)
+    _publish_inputs()
+    interpreters = _reachable_interpreters()
+    assert interpreters, (
+        "no interpreter on this image is executable by the candidate, so this "
+        "probe is watching nothing -- check _INTERPRETER_DIRS")
+    assert any(Path(path).name.startswith("python") for path, _ in interpreters), (
+        "no python interpreter was found to close, though it is the one a "
+        "hand-off reaches for first")
+
+    work = _candidate_dir()
+    out_dir = work / "output"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    os.chmod(out_dir, 0o777)
+    staged = work / "rules.json"
+    _stage_input(RULES_PATH, staged)
+
+    try:
+        for path, _mode in interpreters:
+            os.chmod(path, 0o700)
+        result = _run_agent(
+            [binary, "--input", str(staged), "--output-dir", str(out_dir)], cwd=work)
+    finally:
+        for path, mode in interpreters:
+            try:
+                os.chmod(path, stat.S_IMODE(mode))
+            except OSError:
+                pass
+
+    named = [str(path) for path, _ in interpreters]
+    assert result.returncode == 0, (
+        f"the run exited {result.returncode} with these interpreters closed to "
+        f"it: {named}\nstdout: {result.stdout[-2000:]}\n"
+        f"stderr: {result.stderr[-2000:]}")
+    assert _load_json(out_dir / "summary.json") == FIXTURE["primary"]["summary"], (
+        f"the summary changed with these interpreters closed: {named}")
+    assert _digest(_load_json(out_dir / "compiled_policy.json")) == \
+        FIXTURE["primary"]["policy_digest"]
+    assert _digest(_load_jsonl(out_dir / "exception_queue.jsonl")) == \
+        FIXTURE["primary"]["queue_digest"]
+
+
+def test_a_run_leaves_nothing_outside_its_output_directory():
     """instruction.md scopes a run to its --output-dir, and nothing checked it.
 
     Every other run here reads the artifacts by name, so a run that also dropped a
     scratch file beside them, or in the directory it was started from, satisfied
-    all of them. This walks the whole work area afterwards.
+    all of them.
+
+    Watching the work area alone was not enough either. The run is unprivileged
+    but nothing stops it writing into /tmp, into the HOME it is handed, or into
+    any other world-writable directory the image carries, and a set difference
+    taken over the work tree could not see any of it -- a scratch file left at
+    /tmp survived the check untouched. The watched set is therefore DISCOVERED,
+    each file recorded with its size and modification time so a scratch path
+    rewritten on every run is caught as well as a new one, and each filtered to
+    the entries the candidate uid owns so the verifier's own writes into a shared
+    temporary directory are never mistaken for the run's.
     """
     binary = _build(WORKFLOW_PATH)
     _publish_inputs()
@@ -893,17 +1060,40 @@ def test_a_run_writes_nothing_outside_its_output_directory():
     staged = work / "rules.json"
     _stage_input(RULES_PATH, staged)
 
-    before = {str(q.relative_to(work)) for q in work.rglob("*")}
+    watched = _writable_roots(work)
+    if Path("/tmp").is_dir():
+        assert any(Path("/tmp") == root or str(Path("/tmp")).startswith(str(root) + "/")
+                   for root in watched), "/tmp is watched by nothing here"
+
+    def sweep():
+        seen = {}
+        for root in watched:
+            if not root.exists():
+                continue
+            for q in [root, *root.rglob("*")]:
+                try:
+                    st = q.stat()
+                except OSError:
+                    continue
+                if st.st_uid != CANDIDATE_UID:
+                    continue
+                seen[str(q)] = (st.st_mtime_ns, st.st_size) if not q.is_dir() else None
+        return seen
+
+    before = sweep()
     result = _run_agent(
         [binary, "--input", str(staged), "--output-dir", str(out_dir)], cwd=work)
     assert result.returncode == 0, (
         f"the run exited {result.returncode}\n"
         f"stdout: {result.stdout[-2000:]}\nstderr: {result.stderr[-2000:]}")
-    after = {str(q.relative_to(work)) for q in work.rglob("*")}
-    written = sorted(after - before)
-    expected = sorted("output/" + n for n in OUTPUT_FILES)
+    after = sweep()
+    written = sorted(q for q, v in after.items() if before.get(q, _ABSENT) != v)
+    expected = sorted(str(out_dir / n) for n in OUTPUT_FILES)
     assert written == expected, (
-        f"the run wrote outside its output directory: {sorted(set(written) - set(expected))}")
+        "the run left something outside its output directory: "
+        f"{[q for q in written if q not in expected]}")
+    gone = sorted(q for q in before if q not in after)
+    assert not gone, f"the run removed files outside its output directory: {gone}"
 
 
 def test_frozen_snapshot_preserved():
@@ -1011,3 +1201,4 @@ def test_a_max_rules_of_zero_is_a_cap_of_zero_and_not_an_absent_cap():
     assert summary["compiled_count"] == 1 and summary["deny_count"] == 1
     assert summary["total_source_addresses"] == 0, (
         "the closing deny's own span reached the operator total")
+

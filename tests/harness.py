@@ -397,7 +397,12 @@ def _probe(rules, *, max_rules=1000, port_ceiling=65535, lookback=120, deny_seq=
         for field in omit:
             del default[field]
         _write_json(POLICY_PATH, {"default": default})
-        _write_json(staged, rules)
+        # The contract declares a resolved rule base sorted ascending by sequence
+        # then rule_id, so a probe writes one. Handing the compiler a file in some
+        # other order asked it to normalise something the contract promises is
+        # already normalised, and a compiler that trusted the declared layout --
+        # which it is entitled to -- was failed for it.
+        _write_json(staged, sorted(rules, key=lambda r: (r["sequence"], r["rule_id"])))
         os.chmod(staged, 0o644)
         return _run_pipeline(input_path=staged)
     finally:
@@ -502,6 +507,7 @@ __all__ = [
     "os",
     "shutil",
     "signal",
+    "stat",
     "subprocess",
     "tempfile",
     "time",
