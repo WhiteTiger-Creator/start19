@@ -306,7 +306,18 @@ def _run_agent(argv, cwd: Path):
     with tempfile.TemporaryFile(mode="w+", encoding="utf-8", errors="replace") as out_fh, \
             tempfile.TemporaryFile(mode="w+", encoding="utf-8", errors="replace") as err_fh:
         proc = subprocess.Popen(
-            _SETPRIV + argv, cwd=str(cwd), env=dict(CHILD_ENV),
+            # HOME is the run's OWN directory rather than the scratch root every
+            # run shares. A shared, persistent HOME let a submission stash a
+            # helper -- or a copy of an interpreter, or its own finished answers
+            # -- on an early unrestricted run and reach for it later, which
+            # walked straight past the probes that withhold files under /app,
+            # close the interpreters and sweep for writes: none of them can see
+            # a file that was already there before the run they watch. A fresh
+            # HOME per invocation removes the shelf rather than the reaching.
+            _SETPRIV + argv, cwd=str(cwd),
+            env={**CHILD_ENV, "HOME": str(cwd),
+                 "GOCACHE": str(Path(cwd) / ".gocache"),
+                 "GOPATH": str(Path(cwd) / ".gopath")},
             stdout=out_fh, stderr=err_fh,
             preexec_fn=_apply_rlimits,
         )

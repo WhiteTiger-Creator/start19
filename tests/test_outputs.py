@@ -917,7 +917,10 @@ def _writable_roots(work: Path) -> list:
     an ordinary container, so scanning it would swallow the whole device tree --
     the tmpfs mounts beneath it are picked up from the mount table instead.
     """
-    roots = {work, Path(CHILD_ENV["HOME"]), Path("/tmp"), Path("/var/tmp"),
+    # `work` is now the run's HOME as well; the shared scratch root is watched
+    # beside it, since it is still where a run could try to leave something.
+    roots = {work, Path(CHILD_ENV["HOME"]), Path("/candidate-work"),
+             Path("/tmp"), Path("/var/tmp"),
              Path("/dev/shm"), Path("/run"), Path("/var/lock"), APP}
     try:
         for line in Path("/proc/mounts").read_text(encoding="utf-8").splitlines():
@@ -952,12 +955,18 @@ def _writable_roots(work: Path) -> list:
 # Names an implementation could be handed off to. Only those the image carries
 # are used; the point is not an exhaustive list of every interpreter that exists
 # but that the ones a submission would reach for are shut for one run.
+# `go` belongs here beside the script interpreters. This image carries the
+# toolchain so it can compile the submission, and `go run` will build and
+# execute a second program from a source the compiled one writes at run time --
+# a hand-off that leaves no helper file under /app for the withholding probe to
+# take away and involves no script interpreter for this list to close.
 _INTERPRETER_NAMES = (
     "python3", "python3.13", "python3.12", "python", "perl", "ruby", "node",
     "sh", "bash", "dash", "busybox", "awk", "gawk", "mawk", "php", "tclsh", "lua",
+    "go", "gofmt",
 )
 _INTERPRETER_DIRS = ("/usr/local/bin", "/usr/bin", "/bin", "/usr/local/sbin",
-                     "/usr/sbin", "/sbin")
+                     "/usr/sbin", "/sbin", "/usr/local/go/bin")
 
 
 def _reachable_interpreters() -> list:
@@ -1001,6 +1010,10 @@ def test_the_compiled_program_does_the_work_itself():
     assert any(Path(path).name.startswith("python") for path, _ in interpreters), (
         "no python interpreter was found to close, though it is the one a "
         "hand-off reaches for first")
+    assert any(Path(path).name == "go" for path, _ in interpreters), (
+        "the Go toolchain was not among the interpreters closed, though this "
+        "image carries it to compile the submission and `go run` will build and "
+        "execute a second program from a source written at run time")
 
     work = _candidate_dir()
     out_dir = work / "output"

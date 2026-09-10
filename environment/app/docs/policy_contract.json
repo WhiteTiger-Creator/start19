@@ -63,6 +63,8 @@
       "container": "object",
       "field_notes": {
         "compiled_count": "the rows the compiled policy carries, the closing deny among them",
+        "deny_count": "the rows of the COMPILED POLICY whose action is deny, the closing deny among them: like permit_count it counts what the policy carries rather than what the base offered, so a deny that was set aside as inert or queued over the cap is not among them",
+        "permit_count": "the rows of the COMPILED POLICY whose action is permit, counted the same way, so permit_count and deny_count together come to compiled_count",
         "enabled_rule_count": "the rules the rebuilt base carries with `enabled` true, counted as read and before any of them is set aside: a rule enabled but inert is counted here and by inert_count both",
         "queued_count": "the rows the exception queue carries",
         "rule_count": "the rules the base handed to --input carries, counted as read"
