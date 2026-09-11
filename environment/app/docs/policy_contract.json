@@ -1,4 +1,11 @@
 {
+  "execution": {
+    "entry_point": "/app/workflow/compile_policy.go",
+    "build": "one `package main` in that one file, compiled from that file alone with the toolchain installed here, so a helper split into a sibling source beside it never reaches the build however that sibling declares itself",
+    "dependencies": "the Go standard library and nothing beyond it",
+    "process": "a run does its work itself and starts no other process: not through os/exec or plugin, not through os.StartProcess or syscall.Exec/ForkExec/StartProcess, and not by handing a process-creating number such as SYS_EXECVE, SYS_FORK, SYS_VFORK or SYS_CLONE to a raw syscall. Ordinary system calls through the same entry point -- an fsync on a file the run itself wrote, say -- are the run's own work and are not restricted",
+    "side_effects": "when a run finishes, nothing outside the directory it wrote into has been added to, changed or taken away by it; scratch elsewhere is the run's own business while it lasts and goes when the run does"
+  },
   "cli": {
     "fixed_paths": [
       "/app/data/firewall_policy.json"

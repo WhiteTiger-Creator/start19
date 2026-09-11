@@ -4,6 +4,8 @@ Every test below corresponds to something instruction.md states is graded.
 Shared machinery lives in harness.py.
 """
 
+import re
+
 from harness import *  # noqa: F401,F403
 
 @pytest.fixture(scope="session")
@@ -1025,6 +1027,24 @@ def test_the_compiler_declares_no_option_beyond_the_two_it_documents():
     """
     binary = _build(WORKFLOW_PATH)
     _publish_inputs()
+
+    # The declared set itself, rather than four guesses at what it might be
+    # called. Probing --policy-path/--policy/--groups/--snapshot caught those
+    # four spellings and nothing else, so a compiler that additionally declared
+    # --verbose, or a differently-named override, cleared the rule it was meant
+    # to be held to. The flag package prints every option it declares when it
+    # refuses -h, so the set is read off the program rather than guessed at.
+    usage = _run_agent([binary, "-h"], cwd=_candidate_dir())
+    text = (usage.stdout or "") + (usage.stderr or "")
+    assert text.strip(), (
+        "the compiler printed no usage, so the options it declares cannot be "
+        "read off it")
+    declared_options = {name for name in re.findall(
+        r"-{1,2}([A-Za-z][A-Za-z0-9_.-]*)", text) if name not in {"h", "help"}}
+    assert declared_options == {"input", "output-dir"}, (
+        f"the compiler declares {sorted(declared_options)}; the contract names "
+        "--input and --output-dir and no other option")
+
     for option in ("--policy-path", "--policy", "--groups", "--snapshot"):
         work = _candidate_dir()
         out_dir = work / "output"
@@ -1058,10 +1078,34 @@ def test_the_compiled_program_starts_no_other_program():
         "compiled program is meant to do the work itself rather than hand the "
         "run off to another program")
     payload = _go_source_payload(source)
-    for call in ("os.StartProcess", "syscall.Exec", "syscall.ForkExec",
-                 "syscall.StartProcess", "syscall.Syscall", "syscall.RawSyscall"):
-        assert call not in payload, (
-            f"{WORKFLOW_PATH.name} reaches {call}, which starts another program")
+    # Spelled against the name the FILE binds, not against the package name.
+    # `import sc "syscall"` followed by `sc.Exec(...)` replaces the process with
+    # an interpreter and writes the string "syscall.Exec" nowhere, so a scan for
+    # that literal passed it straight through. The entry points are listed per
+    # package and the local name is asked of Go's own parser.
+    # The named process-starting entry points, and separately the process-creating
+    # NUMBERS a raw syscall could carry. Banning `syscall.Syscall` outright was
+    # broader than the rule it enforces: the same entry point carries SYS_FSYNC,
+    # which flushes a file the run itself wrote, starts nothing, and is ordinary
+    # work a correct compiler may do. What makes a raw syscall a hand-off is the
+    # number, so that is what is refused.
+    banned_entries = {
+        "os": ("StartProcess",),
+        "syscall": ("Exec", "ForkExec", "StartProcess", "SYS_EXECVE", "SYS_EXECVEAT",
+                    "SYS_FORK", "SYS_VFORK", "SYS_CLONE", "SYS_CLONE3"),
+    }
+    local = _go_import_names(source)
+    for path, entries in banned_entries.items():
+        name = local.get(path)
+        if name is None:
+            continue
+        assert name != ".", (
+            f"{WORKFLOW_PATH.name} dot-imports {path}, which puts its "
+            "process-starting entry points in scope under bare names")
+        for entry in entries:
+            assert f"{name}.{entry}" not in payload, (
+                f"{WORKFLOW_PATH.name} reaches {path}.{entry} (written "
+                f"{name}.{entry}), which starts another program or replaces this one")
     # a linker directive lives in a comment, where neither scan above looks
     assert "go:linkname" not in source, (
         f"{WORKFLOW_PATH.name} links to an unexported entry point")

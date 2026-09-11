@@ -350,9 +350,21 @@ func main() {
 	// Anything an earlier run left here is cleared before this run writes, so no
 	// stale artifact is passed off as part of this output. The directory itself
 	// stays: the run does not own the path it writes into.
-	if entries, err := os.ReadDir(*outputDir); err == nil {
-		for _, e := range entries {
-			os.RemoveAll(filepath.Join(*outputDir, e.Name()))
+	// Both errors are reported rather than swallowed. Discarding them meant a
+	// directory that could not be enumerated, or an entry that would not go,
+	// left the run writing its three files beside a survivor from an earlier
+	// run -- which is exactly the stale artifact passed off as this run's
+	// output that the contract forbids, and it happened silently.
+	entries, err := os.ReadDir(*outputDir)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "cannot read %s to clear it: %v\n", *outputDir, err)
+		os.Exit(1)
+	}
+	for _, e := range entries {
+		stale := filepath.Join(*outputDir, e.Name())
+		if err := os.RemoveAll(stale); err != nil {
+			fmt.Fprintf(os.Stderr, "cannot clear %s: %v\n", stale, err)
+			os.Exit(1)
 		}
 	}
 	summary := map[string]any{

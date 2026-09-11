@@ -389,10 +389,11 @@ import (
 )
 
 type reading struct {
-	Imports    []string `json:"imports"`
-	Strings    []string `json:"strings"`
-	Payload    string   `json:"payload"`
-	ParseError string   `json:"parse_error"`
+	Imports     []string    `json:"imports"`
+	ImportNames [][2]string `json:"import_names"`
+	Strings     []string    `json:"strings"`
+	Payload     string      `json:"payload"`
+	ParseError  string      `json:"parse_error"`
 }
 
 func main() {
@@ -446,6 +447,18 @@ func main() {
 				value = spec.Path.Value
 			}
 			out.Imports = append(out.Imports, value)
+			// the name the file actually calls the package by: an alias where
+			// one is written, the last path element otherwise. Without it a
+			// scan for "syscall.Exec" read `import sc "syscall"` as nothing at
+			// all, because the source only ever spells `sc.Exec`.
+			local := value
+			if i := strings.LastIndex(local, "/"); i >= 0 {
+				local = local[i+1:]
+			}
+			if spec.Name != nil {
+				local = spec.Name.Name
+			}
+			out.ImportNames = append(out.ImportNames, [2]string{value, local})
 		}
 	}
 	json.NewEncoder(os.Stdout).Encode(out)
@@ -512,6 +525,17 @@ def _go_source_payload(source: str) -> str:
     calls survives, so f("/te"); g("sts") does not become a match.
     """
     return _go_reading(source)["payload"]
+
+
+def _go_import_names(source: str) -> dict:
+    """Each imported path against the name this file calls it by.
+
+    A scan for `syscall.Exec` reads the source as the source is written, and a
+    file written `import sc "syscall"` never spells that. Go's own parser knows
+    which local name the import bound, so the check asks it rather than
+    assuming the package name and the path's last element agree.
+    """
+    return {path: local for path, local in _go_reading(source).get("import_names", [])}
 
 
 def _go_imports(source: str) -> list:
@@ -726,5 +750,6 @@ __all__ = [
     "_go_reading",
     "_go_strings",
     "_go_source_payload",
+    "_go_import_names",
     "_go_imports",
 ]
