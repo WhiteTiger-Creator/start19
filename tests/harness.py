@@ -365,6 +365,164 @@ def _stage_input(src: Path, dst: Path) -> None:
     os.chmod(dst, 0o644)
 
 
+# --------------------------------------------------------------------------
+# Reading the submitted Go source.
+#
+# The import list and the token stream are read by Go itself rather than by a
+# lexer written here. A hand-written one is only as good as its author's model
+# of the language -- a rune holding a double quote, a raw literal holding a
+# backtick -- and a scan a submission can step out of is not a check at all. A
+# small program built from go/scanner and go/parser hands back the token stream
+# and the import declarations of a file, and nothing the source does can put
+# Go's scanner out of step with Go.
+# --------------------------------------------------------------------------
+_GO_SCANNER_SOURCE = r"""package main
+
+import (
+	"encoding/json"
+	"go/parser"
+	"go/scanner"
+	"go/token"
+	"os"
+	"strconv"
+	"strings"
+)
+
+type reading struct {
+	Imports    []string `json:"imports"`
+	Strings    []string `json:"strings"`
+	Payload    string   `json:"payload"`
+	ParseError string   `json:"parse_error"`
+}
+
+func main() {
+	src, err := os.ReadFile(os.Args[1])
+	if err != nil {
+		os.Stderr.WriteString(err.Error())
+		os.Exit(1)
+	}
+	out := reading{Imports: []string{}, Strings: []string{}}
+
+	fset := token.NewFileSet()
+	file := fset.AddFile(os.Args[1], fset.Base(), len(src))
+	var sc scanner.Scanner
+	sc.Init(file, src, nil, 0) // no comment tokens, errors counted and ignored
+	var payload strings.Builder
+	for {
+		_, tok, lit := sc.Scan()
+		if tok == token.EOF {
+			break
+		}
+		switch tok {
+		case token.STRING, token.CHAR:
+			value, err := strconv.Unquote(lit)
+			if err != nil {
+				value = lit
+			}
+			out.Strings = append(out.Strings, value)
+			payload.WriteString(value)
+		case token.ADD:
+			// the seam of a concatenation contributes nothing, so a path split
+			// across "/te" + "sts" closes back up into the token it spells
+		case token.SEMICOLON:
+			payload.WriteString(";")
+		default:
+			if lit != "" {
+				payload.WriteString(lit)
+			} else {
+				payload.WriteString(tok.String())
+			}
+		}
+	}
+	out.Payload = payload.String()
+
+	parsed, err := parser.ParseFile(token.NewFileSet(), os.Args[1], src, parser.ImportsOnly)
+	if err != nil {
+		out.ParseError = err.Error()
+	} else {
+		for _, spec := range parsed.Imports {
+			value, err := strconv.Unquote(spec.Path.Value)
+			if err != nil {
+				value = spec.Path.Value
+			}
+			out.Imports = append(out.Imports, value)
+		}
+	}
+	json.NewEncoder(os.Stdout).Encode(out)
+}
+"""
+
+_GO_SCANNER_BIN: list = []
+_GO_READINGS: dict = {}
+
+
+def _go_scanner() -> str:
+    """Build the lexing helper once per session."""
+    if not _GO_SCANNER_BIN:
+        d = tempfile.mkdtemp(prefix="goscan_")
+        source = Path(d) / "main.go"
+        source.write_text(_GO_SCANNER_SOURCE, encoding="utf-8")
+        binary = Path(d) / "goscan"
+        built = subprocess.run(
+            ["go", "build", "-o", str(binary), str(source)],
+            capture_output=True, text=True,
+            env={**os.environ, "GOCACHE": "/tmp/gocache", "GO111MODULE": "off",
+                 "GOPATH": "/tmp/gopath"})
+        assert built.returncode == 0, f"the source reader failed to build:\n{built.stderr}"
+        _GO_SCANNER_BIN.append(str(binary))
+    return _GO_SCANNER_BIN[0]
+
+
+def _go_reading(source: str) -> dict:
+    """Lex a Go source with Go's own scanner, cached per source text."""
+    key = hashlib.sha256(source.encode("utf-8")).hexdigest()
+    if key in _GO_READINGS:
+        return _GO_READINGS[key]
+    d = tempfile.mkdtemp(prefix="goread_")
+    path = Path(d) / "subject.go"
+    path.write_text(source, encoding="utf-8")
+    try:
+        done = subprocess.run([_go_scanner(), str(path)],
+                              capture_output=True, text=True, timeout=120)
+        assert done.returncode == 0, f"the source reader failed:\n{done.stderr}"
+        reading = json.loads(done.stdout)
+    finally:
+        shutil.rmtree(d, ignore_errors=True)
+    _GO_READINGS[key] = reading
+    return reading
+
+
+def _go_strings(source: str) -> list:
+    """Every string and rune literal in a Go file, as Go's scanner reads them.
+
+    Raw backtick literals included: they hold a path just as well as an
+    interpreted one does, and a raw-literal path handed to os.ReadFile was invisible to an
+    earlier scan that skipped them.
+    """
+    return list(_go_reading(source)["strings"])
+
+
+def _go_source_payload(source: str) -> str:
+    """The token stream with its comments gone and its literal seams closed up.
+
+    Scanning whole literals catches a path written as one. It does not catch a
+    path assembled out of pieces -- "/te" + "sts/fixtures" is two literals,
+    neither of which contains the token -- so the concatenating plus contributes
+    nothing here and the pieces close back up. The punctuation between unrelated
+    calls survives, so f("/te"); g("sts") does not become a match.
+    """
+    return _go_reading(source)["payload"]
+
+
+def _go_imports(source: str) -> list:
+    """Import paths declared by a Go file, read from its import declarations."""
+    reading = _go_reading(source)
+    assert not reading["parse_error"], (
+        f"the submitted source does not parse as Go: {reading['parse_error']}")
+    return list(reading["imports"])
+
+
+
 def _run_pipeline(script_path: Path = WORKFLOW_PATH, input_path: Path = RULES_PATH):
     """Build and run the submitted compiler as an unprivileged subprocess."""
     binary = _build(script_path)
@@ -565,4 +723,8 @@ __all__ = [
     "_run_agent",
     "_stage_input",
     "_run_pipeline",
+    "_go_reading",
+    "_go_strings",
+    "_go_source_payload",
+    "_go_imports",
 ]

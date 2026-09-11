@@ -27,6 +27,24 @@ def test_recovery_sources_are_intact():
     assert _digest(live) == FIXTURE["rule_sources_digest"]
 
 
+def test_recovery_sources_are_still_intact_after_the_graded_run(primary_outputs):
+    """Checked again once the compiler has run, not only before it.
+
+    The digest above is taken at collection time, before anything the submission
+    wrote is executed, so it graded the state the agent left rather than the one
+    the run leaves. A compiler that appended an audit line to the governance log
+    after emitting its three artifacts -- an ordinary enough thing to write --
+    passed every assertion in this file, because the only later check on that
+    file asked whether it existed and was not empty. Depending on
+    primary_outputs orders this one after the graded run.
+    """
+    live = {n: hashlib.sha256(Path(p).read_bytes()).hexdigest() for n, p in (
+        ("snapshot", SNAPSHOT_PATH), ("journal", JOURNAL_PATH), ("groups", GROUPS_PATH),
+        ("policy", POLICY_PATH), ("log", LOG_PATH))}
+    assert _digest(live) == FIXTURE["rule_sources_digest"], (
+        "a rule source was rewritten while the graded run was in flight")
+
+
 def test_rule_base_was_recovered():
     """The rebuilt rule base matches the governed replay exactly."""
     recovered = _load_json(RULES_PATH)
@@ -652,10 +670,21 @@ def test_policy_path_actually_influences_the_output():
 
 
 def test_run_is_idempotent(primary_outputs):
-    """Re-running over the same rule base reproduces the same artifacts."""
-    _, summary, policy, queue = primary_outputs
-    _, s2, p2, q2 = _run_pipeline()
+    """Re-running over the same rule base reproduces the same artifacts.
+
+    Byte for byte, not merely value for value. Both comparisons were made on
+    decoded documents, and _digest sorts keys before hashing, so a compiler that
+    rendered summary.json with its fields in a different order on every run
+    satisfied both while its artifacts differed as files -- which is not what
+    "identical across reruns" says.
+    """
+    first_dir, summary, policy, queue = primary_outputs
+    second_dir, s2, p2, q2 = _run_pipeline()
     assert s2 == summary and _digest(p2) == _digest(policy) and _digest(q2) == _digest(queue)
+    for name in ("summary.json", "compiled_policy.json", "exception_queue.jsonl"):
+        assert (second_dir / name).read_bytes() == (first_dir / name).read_bytes(), (
+            f"{name} came out with the same values but different bytes on a "
+            "second run over the same rule base")
 
 
 def test_stale_contents_are_cleared_from_a_given_output_directory():
@@ -985,6 +1014,59 @@ def _reachable_interpreters() -> list:
     return sorted(found.values(), key=lambda pair: str(pair[0]))
 
 
+def test_the_compiler_declares_no_option_beyond_the_two_it_documents():
+    """instruction.md: the firewall policy is always read from its fixed path.
+
+    That rule was graded only in the positive direction -- change the policy in
+    place and the run moves -- which an implementation offering a --policy-path
+    of its own passes without difficulty, since no run here ever supplies one.
+    A compiler that declares only the two documented options refuses an unknown
+    one instead, which is what the flag package does for it.
+    """
+    binary = _build(WORKFLOW_PATH)
+    _publish_inputs()
+    for option in ("--policy-path", "--policy", "--groups", "--snapshot"):
+        work = _candidate_dir()
+        out_dir = work / "output"
+        out_dir.mkdir(parents=True, exist_ok=True)
+        os.chmod(out_dir, 0o777)
+        elsewhere = work / "elsewhere.json"
+        elsewhere.write_text("{}\n", encoding="utf-8")
+        os.chmod(elsewhere, 0o644)
+        result = _run_agent(
+            [binary, option, str(elsewhere), "--output-dir", str(out_dir)], cwd=work)
+        assert result.returncode != 0, (
+            f"the compiler accepted {option}, so an input the contract fixes at "
+            "an absolute path can be pointed somewhere else after all")
+
+
+def test_the_compiled_program_starts_no_other_program():
+    """instruction.md: the compiled program does the work itself.
+
+    Withholding files and closing interpreters are both run-time defences, and
+    both were reasoned around: a wrapper can carry a native helper as a byte
+    constant, write it, run it and unlink it before the sweep looks, and never
+    touch an interpreter at all. There is no way to start a process in Go that
+    does not go through one of these, so this closes the route at the source
+    rather than chasing each way of reaching it.
+    """
+    source = WORKFLOW_PATH.read_text(encoding="utf-8")
+    banned_imports = {"os/exec", "plugin", "C"}
+    declared = set(_go_imports(source))
+    assert not declared & banned_imports, (
+        f"{WORKFLOW_PATH.name} imports {sorted(declared & banned_imports)}: the "
+        "compiled program is meant to do the work itself rather than hand the "
+        "run off to another program")
+    payload = _go_source_payload(source)
+    for call in ("os.StartProcess", "syscall.Exec", "syscall.ForkExec",
+                 "syscall.StartProcess", "syscall.Syscall", "syscall.RawSyscall"):
+        assert call not in payload, (
+            f"{WORKFLOW_PATH.name} reaches {call}, which starts another program")
+    # a linker directive lives in a comment, where neither scan above looks
+    assert "go:linkname" not in source, (
+        f"{WORKFLOW_PATH.name} links to an unexported entry point")
+
+
 def test_the_compiled_program_does_the_work_itself():
     """instruction.md says the compiled program never hands the run off.
 
@@ -1015,6 +1097,23 @@ def test_the_compiled_program_does_the_work_itself():
         "image carries it to compile the submission and `go run` will build and "
         "execute a second program from a source written at run time")
 
+    # /candidate-work is world-writable and outlives every run, so closing the
+    # interpreters on the image left one route open: a wrapper that copied
+    # python3 into that directory on an earlier, unrestricted run and fell back
+    # to its own copy here. The scratch root is emptied first, so the only
+    # interpreters left to reach are the ones this probe has just closed.
+    for stale in sorted(_CWORK.iterdir()):
+        if stale.is_dir() and not stale.is_symlink():
+            shutil.rmtree(stale, ignore_errors=True)
+        else:
+            try:
+                stale.unlink()
+            except OSError:
+                pass
+    assert not any(q for q in _CWORK.iterdir()), (
+        f"the scratch root still holds {sorted(q.name for q in _CWORK.iterdir())}, "
+        "so a copy of an interpreter planted on an earlier run could survive this probe")
+
     work = _candidate_dir()
     out_dir = work / "output"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -1033,6 +1132,15 @@ def test_the_compiled_program_does_the_work_itself():
                 os.chmod(path, stat.S_IMODE(mode))
             except OSError:
                 pass
+    # The modes are captured once per RESOLVED path, so /bin/bash and
+    # /usr/bin/bash -- the same file on this image -- are saved once rather than
+    # twice, and the second save cannot record the mode the first chmod just
+    # imposed. That is worth checking rather than assuming: leaving an
+    # interpreter closed behind us breaks the harness for everything after.
+    for path, mode in interpreters:
+        assert path.stat().st_mode & stat.S_IXOTH, (
+            f"{path} was left closed after the probe: the modes were not put "
+            f"back, and everything that runs after this depends on them")
 
     named = [str(path) for path, _ in interpreters]
     assert result.returncode == 0, (
